@@ -493,6 +493,7 @@ Citizen.CreateThread(function()
 
 				newX = x + math.random(-300, 300)
 				newY = y + math.random(-300, 300)
+				_,newZ = GetGroundZFor_3dCoord(newX+.0,newY+.0,z+999.0, 1)
 
 				for _, player in pairs(players) do
 					Wait(1)
@@ -506,7 +507,7 @@ Citizen.CreateThread(function()
 				end
 			until canSpawn
 
-			ped = CreatePed(4, GetHashKey(choosenPed), newX, newY, z - 500, 0.0, true, true)
+			ped = CreatePed(4, GetHashKey(choosenPed), newX, newY, newZ - 500, 0.0, true, true)
 			SetPedArmour(ped, 100)
 			SetPedAccuracy(ped, 25)
 			SetPedSeeingRange(ped, 9900000.0)
@@ -584,8 +585,7 @@ Citizen.CreateThread(function()
 					-- Set ped as no longer needed for despawning
 					local model = GetEntityModel(ped)
 					SetEntityAsNoLongerNeeded(ped)
-					eh = SetModelAsNoLongerNeeded(model)
-					Citizen.Trace(eh)
+					SetModelAsNoLongerNeeded(model)
 					table.remove(peds, i)
 				end
 			end
@@ -599,7 +599,6 @@ AddEventHandler("Z:cleanup", function()
 		-- Set ped as no longer needed for despawning
 		local model = GetEntityModel(ped)
 		SetEntityAsNoLongerNeeded(ped)
-		Citizen.Trace(model)
 		SetModelAsNoLongerNeeded(model)
 
 		table.remove(peds, i)

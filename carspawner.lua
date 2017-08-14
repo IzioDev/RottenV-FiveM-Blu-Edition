@@ -522,6 +522,7 @@ Citizen.CreateThread(function()
 				
 				newX = x + math.random(-2200, 2200)
 				newY = y + math.random(-2200, 2200)
+				_,newZ = GetGroundZFor_3dCoord(newX+.0,newY+.0,z+999.0, 1)
 				
 				for _, player in pairs(players) do
 					Wait(1)
@@ -541,7 +542,7 @@ Citizen.CreateThread(function()
 				Wait(1)
 			end
 			
-			car = CreateVehicle(choosenCar, newX, newY, z - 500, math.random(), true, true)
+			car = CreateVehicle(choosenCar, newX, newY, newZ - 500, math.random(), true, true)
 			SetVehicleFuelLevel(car, math.random() + math.random(10, 80))
 			SetVehicleEngineHealth(car, math.random() + math.random(40, 99)*10)
 			PlaceObjectOnGroundProperly(car)

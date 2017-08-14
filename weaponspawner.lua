@@ -81,12 +81,13 @@ AddEventHandler("Z:playerUpdate", function(mPlayers)
 end)
 
 weapons = {}
+newz = 0.0
 
 Citizen.CreateThread(function()
 	while true do
 		Wait(1)
 		
-		if #weapons < 3 then
+		if #weapons < 5 then
 			x, y, z = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
 			
 			repeat
@@ -94,7 +95,7 @@ Citizen.CreateThread(function()
 				
 				newX = x + math.random(-300, 300)
 				newY = y + math.random(-300, 300)
-				
+				_,newZ = GetGroundZFor_3dCoord(newX+.0,newY+.0,z+999.0, 1)
 				for player, _ in pairs(players) do
 					Wait(1)
 					playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(player), true))
@@ -109,15 +110,16 @@ Citizen.CreateThread(function()
 			
 			choosenWeapon = spawnableWeapons[math.random(1, #spawnableWeapons)]
 			choosenWeapon = string.upper(choosenWeapon)
-			weapon = CreatePickupRotate(GetHashKey(choosenWeapon), newX, newY, z, 0.0, 0.0, 0.0, 8, 1.0, 24, 24, true, GetHashKey(choosenWeapon))
+			weapon = CreatePickupRotate(GetHashKey(choosenWeapon), newX, newY, newZ, 0.0, 0.0, 0.0, 8, 1.0, 24, 24, true, GetHashKey(choosenWeapon))
 			SetEntityDynamic(weapon, true)
 			SetEntityRecordsCollisions(weapon, true)
 			SetEntityHasGravity(weapon, true)
 			FreezeEntityPosition(weapon, false)
 			SetEntityVelocity(weapon, 0.0, 0.0, -0.2)
 			
+			
 			Citizen.Trace("Spawned weapon " .. choosenWeapon .. "\n")
-			weaponInfo = {weapon = weapon, x = newX, y = newY, z = z}
+			weaponInfo = {weapon = weapon, x = newX, y = newY, z = newZ}
 			table.insert(weapons, weaponInfo)
 		end
 		
@@ -138,6 +140,8 @@ Citizen.CreateThread(function()
 		end
 	end
 end)
+	
+
 
 RegisterNetEvent("Z:cleanup")
 AddEventHandler("Z:cleanup", function()
