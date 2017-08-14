@@ -21,6 +21,11 @@ local welcomed = false
 AddEventHandler("playerSpawned", function(spawn)
 	if spawnWithFlashlight then
 		GiveWeaponToPed(GetPlayerPed(-1), GetHashKey("WEAPON_FLASHLIGHT"), 1, false, false)
+		GiveWeaponToPed(GetPlayerPed(-1), GetHashKey("WEAPON_BAT"), 1, false, false)
+		DecorRegister("hunger",1)
+		DecorRegister("thirst",1)
+		DecorSetFloat(GetPlayerPed(-1), "hunger", 100.0)
+		DecorSetFloat(GetPlayerPed(-1), "thirst", 100.0)
 	end
 end)
 
