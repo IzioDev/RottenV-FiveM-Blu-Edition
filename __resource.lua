@@ -16,6 +16,7 @@ client_scripts {
 		"killplayer.lua",
 		"drawtext.lua",
 		"host.lua",
+		"food.lua",
 }
 
 resource_type 'map' { gameTypes = { fivem = true } }

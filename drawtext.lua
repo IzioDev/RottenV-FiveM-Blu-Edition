@@ -39,7 +39,7 @@ Citizen.CreateThread(function()
         	        SetTextDropShadow()
         	        SetTextOutline()
         	        SetTextEntry("STRING")
-        	        AddTextComponentString("Hunger: " .. hunger)
+        	        AddTextComponentString("Hunger: " .. math.round(hunger))
         	        DrawText(0.16, 0.85)
                 end
                 thirst = DecorGetFloat(GetPlayerPed(-1), "thirst")
@@ -53,8 +53,13 @@ Citizen.CreateThread(function()
         	        SetTextDropShadow()
         	        SetTextOutline()
         	        SetTextEntry("STRING")
-        	        AddTextComponentString("Thirst: " .. thirst)
+        	        AddTextComponentString("Thirst: " .. math.round(thirst))
         	        DrawText(0.16, 0.90)
                 end
 	end
 end)
+
+
+function math.round(num, numDecimalPlaces)
+	return string.format("%.0f", num)
+end

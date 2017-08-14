@@ -338,7 +338,7 @@ local pedModels =
 "IG_TaoCheng",
 "IG_TaosTranslator",
 "U_M_Y_Zombie_01"
-}
+}	
 -- CODE --
 
 players = {}
@@ -359,7 +359,7 @@ Citizen.CreateThread(function()
 	while true do
 		Wait(1)
 
-		if #peds < 200 then
+		if #peds < 120 then
 			x, y, z = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
 
 			choosenPed = pedModels[math.random(1, #pedModels)]
@@ -375,7 +375,7 @@ Citizen.CreateThread(function()
 				newX = x + math.random(-300, 300)
 				newY = y + math.random(-300, 300)
 				_,newZ = GetGroundZFor_3dCoord(newX+.0,newY+.0,z+999.0, 1)
-
+				
 				for _, player in pairs(players) do
 					Wait(1)
 					playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(player), true))
@@ -386,13 +386,13 @@ Citizen.CreateThread(function()
 						canSpawn = true
 					end
 				end
-			until canSpawn
+			until canSpawn and newZ ~= 0
 
 			ped = CreatePed(4, GetHashKey(choosenPed), newX, newY, newZ - 500, 0.0, true, true)
 			SetPedArmour(ped, 100)
 			SetPedAccuracy(ped, 25)
-			SetPedSeeingRange(ped, 9990000.0)
-			SetPedHearingRange(ped, 9990000.0)
+			SetPedSeeingRange(ped, 300.0)
+			SetPedHearingRange(ped, 300.0)
 			
 
 			SetPedFleeAttributes(ped, 0, 0)
@@ -408,7 +408,7 @@ Citizen.CreateThread(function()
 			DisablePedPainAudio(ped, true)
 			SetPedDiesInWater(ped, false)
 			SetPedDiesWhenInjured(ped, false)
-			PlaceObjectOnGroundProperly(ped)
+		--	PlaceObjectOnGroundProperly(ped)
 			SetPedIsDrunk(ped, true)
 			SetPedConfigFlag(ped,100,1)
 			RequestAnimSet("move_m@drunk@verydrunk")
@@ -442,14 +442,14 @@ Citizen.CreateThread(function()
 			elseif IsPedDeadOrDying(ped, 1) then
 				-- Set ped as no longer needed for despawning
 				Citizen.InvokeNative(0xB736A491E64A32CF, Citizen.PointerValueIntInitialized(ped))
-				table.remove(peds, i)
+			table.remove(peds, i)
 			else
 				playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
 				pedX, pedY = table.unpack(GetEntityCoords(ped, true))
 			SetPedArmour(ped, 100)
 			SetPedAccuracy(ped, 25)
-			SetPedSeeingRange(ped, 9900000.0)
-			SetPedHearingRange(ped, 9900000.0)
+			SetPedSeeingRange(ped, 300.0)
+			SetPedHearingRange(ped, 300.0)
 
 			SetPedFleeAttributes(ped, 0, 0)
    			SetPedCombatAttributes(ped, 16, 1)

@@ -87,15 +87,21 @@ Citizen.CreateThread(function()
 	while true do
 		Wait(1)
 		
-		if #weapons < 5 then
+		if #weapons < 7 then
 			x, y, z = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
 			
 			repeat
 				Wait(1)
 				
-				newX = x + math.random(-300, 300)
-				newY = y + math.random(-300, 300)
-				_,newZ = GetGroundZFor_3dCoord(newX+.0,newY+.0,z+999.0, 1)
+				repeat
+				Wait(1)
+					newX = x + math.random(-300, 300)
+					newY = y + math.random(-300, 300)
+					_,newZ = GetGroundZFor_3dCoord(newX+.0,newY+.0,z+9999.0, 1)
+				until newZ ~= 0
+				
+				newZ = newZ+1.5
+				Citizen.Trace(newZ)
 				for player, _ in pairs(players) do
 					Wait(1)
 					playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(player), true))
@@ -110,11 +116,13 @@ Citizen.CreateThread(function()
 			
 			choosenWeapon = spawnableWeapons[math.random(1, #spawnableWeapons)]
 			choosenWeapon = string.upper(choosenWeapon)
-			weapon = CreatePickupRotate(GetHashKey(choosenWeapon), newX, newY, newZ, 0.0, 0.0, 0.0, 8, 1.0, 24, 24, true, GetHashKey(choosenWeapon))
-			SetEntityDynamic(weapon, true)
+			chance = math.random(100,1000)
+			chance = chance/100
+			weapon = CreatePickupRotate(GetHashKey(choosenWeapon), newX, newY, newZ, 0.0, 0.0, 0.0, 8, chance, 24, 24, true, GetHashKey(choosenWeapon))
+		--	SetEntityDynamic(weapon, true)
 			SetEntityRecordsCollisions(weapon, true)
-			SetEntityHasGravity(weapon, true)
-			FreezeEntityPosition(weapon, false)
+			SetEntityHasGravity(weapon, false)
+			FreezeEntityPosition(weapon, true)
 			SetEntityVelocity(weapon, 0.0, 0.0, -0.2)
 			
 			
@@ -124,8 +132,9 @@ Citizen.CreateThread(function()
 		end
 		
 		for i, weaponInfo in pairs(weapons) do
-			if not DoesPickupExist(weaponInfo.weapon) then
+			if not DoesPickupExist(weaponInfo.weapon) or HasPickupBeenCollected(weaponInfo.weapon) then
 				table.remove(weapons, i)
+				Citizen.Trace("rip")
 			else
 				playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
 				weaponX = weaponInfo.x
@@ -140,7 +149,17 @@ Citizen.CreateThread(function()
 		end
 	end
 end)
-	
+
+--[[ debug stuff
+Citizen.CreateThread(function()
+while true do
+	Citizen.Wait(0)
+	for i, weaponInfo in pairs(weapons) do
+		playerX, playerY, playerZ = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
+		DrawLine(playerX,playerY, playerZ, weaponInfo.x, weaponInfo.y, weaponInfo.z, 0,255,0,255)
+	end
+end
+end) ]]
 
 
 RegisterNetEvent("Z:cleanup")

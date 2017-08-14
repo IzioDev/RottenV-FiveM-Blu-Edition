@@ -514,14 +514,14 @@ Citizen.CreateThread(function()
 	while true do
 		Wait(1)
 		
-		if #cars < 1 then
+		if #cars < 2 then
 			x, y, z = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
 			
 			repeat
 				Wait(1)
 				
-				newX = x + math.random(-2200, 2200)
-				newY = y + math.random(-2200, 2200)
+				newX = x + math.random(-1600, 1600)
+				newY = y + math.random(-1600, 1600)
 				_,newZ = GetGroundZFor_3dCoord(newX+.0,newY+.0,z+999.0, 1)
 				
 				for _, player in pairs(players) do
@@ -545,7 +545,7 @@ Citizen.CreateThread(function()
 			car = CreateVehicle(choosenCar, newX, newY, newZ - 500, math.random(), true, true)
 			SetVehicleFuelLevel(car, math.random() + math.random(10, 80))
 			SetVehicleEngineHealth(car, math.random() + math.random(40, 99)*10)
-			PlaceObjectOnGroundProperly(car)
+			--PlaceObjectOnGroundProperly(car)
 			
 			Citizen.Trace("Spawned car with fuel:"..GetVehicleFuelLevel(car).." and HP: "..GetVehicleEngineHealth(car))
 			table.insert(cars, car)
@@ -558,7 +558,7 @@ Citizen.CreateThread(function()
 				playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
 				carX, carY = table.unpack(GetEntityCoords(car, false))
 				
-				if carX < playerX - 2500 or carX > playerX + 2500 or carY < playerY - 2500 or carY > playerY + 2500 then
+				if carX < playerX - 1600 or carX > playerX + 1600 or carY < playerY - 1600 or carY > playerY + 1600 then
 					-- Set car as no longer needed for despawning
 					Citizen.InvokeNative(0xB736A491E64A32CF, Citizen.PointerValueIntInitialized(car))
 					table.remove(cars, i)
@@ -567,6 +567,18 @@ Citizen.CreateThread(function()
 		end
 	end
 end)
+
+--[[ debug stuff
+Citizen.CreateThread(function()
+while true do
+	Citizen.Wait(0)
+	for i, car in pairs(cars) do
+		playerX, playerY, playerZ = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
+		carX, carY, carZ = table.unpack(GetEntityCoords(car, false))
+		DrawLine(playerX,playerY, playerZ, carX, carY, carZ, 255,0,0,255)
+	end
+end
+end) ]]
 
 RegisterNetEvent("Z:cleanup")
 AddEventHandler("Z:cleanup", function()
