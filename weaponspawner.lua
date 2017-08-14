@@ -68,7 +68,8 @@ local spawnableWeapons =
 	"pickup_weapon_CarbineRifleMk2",
 	"pickup_weapon_CombatMGMk2",
 	"pickup_weapon_HeavySniperMk2",
-	"pickup_weapon_SMGMk2"
+	"pickup_weapon_SMGMk2",
+	"PICKUP_HEALTH_STANDARD"
 }
 
 -- CODE --
@@ -101,7 +102,6 @@ Citizen.CreateThread(function()
 				until newZ ~= 0
 				
 				newZ = newZ+1.5
-				Citizen.Trace(newZ)
 				for player, _ in pairs(players) do
 					Wait(1)
 					playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(player), true))
