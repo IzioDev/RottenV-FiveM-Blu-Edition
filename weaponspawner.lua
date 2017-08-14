@@ -85,16 +85,16 @@ weapons = {}
 Citizen.CreateThread(function()
 	while true do
 		Wait(1)
-
+		
 		if #weapons < 3 then
 			x, y, z = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
-
+			
 			repeat
 				Wait(1)
-
+				
 				newX = x + math.random(-300, 300)
 				newY = y + math.random(-300, 300)
-
+				
 				for player, _ in pairs(players) do
 					Wait(1)
 					playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(player), true))
@@ -106,7 +106,7 @@ Citizen.CreateThread(function()
 					end
 				end
 			until canSpawn
-
+			
 			choosenWeapon = spawnableWeapons[math.random(1, #spawnableWeapons)]
 			choosenWeapon = string.upper(choosenWeapon)
 			weapon = CreatePickupRotate(GetHashKey(choosenWeapon), newX, newY, z, 0.0, 0.0, 0.0, 8, 1.0, 24, 24, true, GetHashKey(choosenWeapon))
@@ -115,12 +115,12 @@ Citizen.CreateThread(function()
 			SetEntityHasGravity(weapon, true)
 			FreezeEntityPosition(weapon, false)
 			SetEntityVelocity(weapon, 0.0, 0.0, -0.2)
-
+			
 			Citizen.Trace("Spawned weapon " .. choosenWeapon .. "\n")
 			weaponInfo = {weapon = weapon, x = newX, y = newY, z = z}
 			table.insert(weapons, weaponInfo)
 		end
-
+		
 		for i, weaponInfo in pairs(weapons) do
 			if not DoesPickupExist(weaponInfo.weapon) then
 				table.remove(weapons, i)
@@ -128,7 +128,7 @@ Citizen.CreateThread(function()
 				playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
 				weaponX = weaponInfo.x
 				weaponY = weaponInfo.y
-
+				
 				if weaponX < playerX - 400 or weaponX > playerX + 400 or weaponY < playerY - 400 or weaponY > playerY + 400 then
 					-- Set weapon as no longer needed for despawning
 					Citizen.InvokeNative(0xB736A491E64A32CF, Citizen.PointerValueIntInitialized(weaponInfo.weapon))
@@ -144,7 +144,7 @@ AddEventHandler("Z:cleanup", function()
 	for i, weapon in pairs(weapons) do
 		-- Set weapon as no longer needed for despawning
 		Citizen.InvokeNative(0xB736A491E64A32CF, Citizen.PointerValueIntInitialized(weapon))
-
+		
 		table.remove(weapons, i)
 	end
 end)

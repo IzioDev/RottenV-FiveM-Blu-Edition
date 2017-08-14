@@ -9,7 +9,7 @@ client_scripts {
 		"newplayer.lua",
 		"nopeds.lua",
 		"zombiespawner.lua",
-		"wreckspawner.lua",
+		--"wreckspawner.lua",
 		"weaponspawner.lua",
 		"carspawner.lua",
 		"environment.lua",
