@@ -17,3 +17,7 @@ client_scripts {
 		"drawtext.lua",
 		"host.lua",
 }
+
+resource_type 'map' { gameTypes = { fivem = true } }
+
+map 'map.lua'

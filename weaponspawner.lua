@@ -148,7 +148,6 @@ AddEventHandler("Z:cleanup", function()
 	for i, weapon in pairs(weapons) do
 		-- Set weapon as no longer needed for despawning
 		Citizen.InvokeNative(0xB736A491E64A32CF, Citizen.PointerValueIntInitialized(weapon))
-		
 		table.remove(weapons, i)
 	end
 end)

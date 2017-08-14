@@ -17,13 +17,13 @@ Citizen.CreateThread(function()
 end)
 
 local welcomed = false
-
+		DecorRegister("hunger",1)
+		DecorRegister("thirst",1)
 AddEventHandler("playerSpawned", function(spawn)
 	if spawnWithFlashlight then
 		GiveWeaponToPed(GetPlayerPed(-1), GetHashKey("WEAPON_FLASHLIGHT"), 1, false, false)
 		GiveWeaponToPed(GetPlayerPed(-1), GetHashKey("WEAPON_BAT"), 1, false, false)
-		DecorRegister("hunger",1)
-		DecorRegister("thirst",1)
+		GiveWeaponToPed(GetPlayerPed(-1), 0xFBAB5776, true)
 		DecorSetFloat(GetPlayerPed(-1), "hunger", 100.0)
 		DecorSetFloat(GetPlayerPed(-1), "thirst", 100.0)
 	end
