@@ -1,3 +1,5 @@
+firstSpawn = true
+
 Citizen.CreateThread( function()
 	RegisterNetEvent('loadPlayerIn')
 	AddEventHandler('loadPlayerIn', function(x,y,z,hunger,thirst,weapons) 
@@ -33,9 +35,12 @@ Citizen.CreateThread( function()
 	end)
 	
 	AddEventHandler("playerSpawned", function()
+	if firstSpawn then
 		TriggerServerEvent("spawnPlayer", GetPlayerServerId(PlayerId()))
 		Citizen.Trace("Requesting Spawn!")
 		Citizen.Trace("Sent!")
+		firstSpawn = false
+	end
 	end)
 	
 --	AddEventHandler("playerSpawned", function()
