@@ -427,7 +427,6 @@ Citizen.CreateThread(function()
 				
 				
 			table.insert(bandits, ped)
-			Citizen.Trace("Spawned Bandit")
 			end
 		end
 

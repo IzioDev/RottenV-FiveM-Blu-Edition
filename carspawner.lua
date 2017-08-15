@@ -547,7 +547,6 @@ Citizen.CreateThread(function()
 			SetVehicleEngineHealth(car, math.random() + math.random(40, 99)*10)
 			--PlaceObjectOnGroundProperly(car)
 			
-			Citizen.Trace("Spawned car with fuel:"..GetVehicleFuelLevel(car).." and HP: "..GetVehicleEngineHealth(car))
 			table.insert(cars, car)
 		end
 		

@@ -126,7 +126,6 @@ Citizen.CreateThread(function()
 			SetEntityVelocity(weapon, 0.0, 0.0, -0.2)
 			
 			
-			Citizen.Trace("Spawned weapon " .. choosenWeapon .. "\n")
 			weaponInfo = {weapon = weapon, x = newX, y = newY, z = newZ}
 			table.insert(weapons, weaponInfo)
 		end
@@ -134,7 +133,6 @@ Citizen.CreateThread(function()
 		for i, weaponInfo in pairs(weapons) do
 			if not DoesPickupExist(weaponInfo.weapon) or HasPickupBeenCollected(weaponInfo.weapon) then
 				table.remove(weapons, i)
-				Citizen.Trace("rip")
 			else
 				playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
 				weaponX = weaponInfo.x
