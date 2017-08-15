@@ -17,6 +17,7 @@ client_scripts {
 		"drawtext.lua",
 		"host.lua",
 		"food.lua",
+		"banditspawner.lua"
 }
 
 resource_type 'map' { gameTypes = { fivem = true } }

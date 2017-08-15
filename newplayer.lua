@@ -32,6 +32,16 @@ end)
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
+		if GetEntityHeightAboveGround(GetPlayerPed(-1)) < 50 and IsPedInParachuteFreeFall(GetPlayerPed(-1)) then
+			ForcePedToOpenParachute(GetPlayerPed(-1))
+		end
+	end
+end)
+		
+
+Citizen.CreateThread(function()
+	while true do
+		Citizen.Wait(0)
 		if not displayRadar then
 			DisplayRadar(false)
 		end

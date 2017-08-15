@@ -1,9 +1,16 @@
--- CONFIG --
-
--- Zombies have a 1 in 150 chance to spawn with guns
--- It will choose a gun in this list when it happens
--- Weapon list here: https://www.se7ensins.com/forums/threads/weapon-and-explosion-hashes-list.1045035/
-
+local pedWeps =
+{
+	"WEAPON_PISTOL",
+	"WEAPON_MG",
+	"WEAPON_PUMPSHOTGUN",
+	"WEAPON_SNIPERRIFLE",
+	"WEAPON_SAWNOFFSHOTGUN",
+	"WEAPON_MICROSMG",
+	"WEAPON_COMPACTRIFLE",
+	"WEAPON_COMBATPISTOL",
+	"WEAPON_MUSKET",
+	"WEAPON_BULLPUPRIFLE"
+}
 
 local pedModels = 
 {
@@ -341,137 +348,149 @@ AddEventHandler("Z:playerUpdate", function(mPlayers)
 	players = mPlayers
 end)
 
-peds = {}
+bandits = {}
 
 Citizen.CreateThread(function()
-	AddRelationshipGroup("zombeez")
-	SetRelationshipBetweenGroups(5, GetHashKey("zombeez"), GetHashKey("PLAYER"))
-	SetRelationshipBetweenGroups(5, GetHashKey("zombeez"), GetHashKey("bandit"))
-	SetRelationshipBetweenGroups(5, GetHashKey("PLAYER"), GetHashKey("zombeez"))
-	
-	SetAiMeleeWeaponDamageModifier(2.0)
+	AddRelationshipGroup("bandit")
+	SetRelationshipBetweenGroups(5, GetHashKey("bandit"), GetHashKey("PLAYER"))
+	SetRelationshipBetweenGroups(5, GetHashKey("bandit"), GetHashKey("zombeez"))
+	SetRelationshipBetweenGroups(5, GetHashKey("PLAYER"), GetHashKey("bandit"))
+	SetAiMeleeWeaponDamageModifier(1.0)
 
 	while true do
 		Wait(1)
 
-		if #peds < 120 then
+		if #bandits < 4 then
 			x, y, z = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
 
-			choosenPed = pedModels[math.random(1, #pedModels)]
-			choosenPed = string.upper(choosenPed)
-			RequestModel(GetHashKey(choosenPed))
-			while not HasModelLoaded(GetHashKey(choosenPed)) or not HasCollisionForModelLoaded(GetHashKey(choosenPed)) do
+			choosenPed1 = pedModels[math.random(1, #pedModels)]
+			choosenPed1 = string.upper(choosenPed1)
+			choosenPed2 = pedModels[math.random(1, #pedModels)]
+			choosenPed2 = string.upper(choosenPed2)
+			choosenPed3 = pedModels[math.random(1, #pedModels)]
+			choosenPed3 = string.upper(choosenPed3)
+			choosenPed4 = pedModels[math.random(1, #pedModels)]
+			choosenPed4 = string.upper(choosenPed4)
+			
+			
+			RequestModel(GetHashKey(choosenPed1))
+			while not HasModelLoaded(GetHashKey(choosenPed1)) or not HasCollisionForModelLoaded(GetHashKey(choosenPed1)) do
+				Wait(1)
+			end
+			RequestModel(GetHashKey(choosenPed2))
+			while not HasModelLoaded(GetHashKey(choosenPed2)) or not HasCollisionForModelLoaded(GetHashKey(choosenPed2)) do
+				Wait(1)
+			end
+			RequestModel(GetHashKey(choosenPed3))
+			while not HasModelLoaded(GetHashKey(choosenPed3)) or not HasCollisionForModelLoaded(GetHashKey(choosenPed3)) do
+				Wait(1)
+			end
+			RequestModel(GetHashKey(choosenPed4))
+			while not HasModelLoaded(GetHashKey(choosenPed4)) or not HasCollisionForModelLoaded(GetHashKey(choosenPed4)) do
 				Wait(1)
 			end
 
 			repeat
 				Wait(1)
 
-				newX = x + math.random(-300, 300)
-				newY = y + math.random(-300, 300)
+				newX = x + math.random(-2000, 2000)
+				newY = y + math.random(-2000, 2000)
 				_,newZ = GetGroundZFor_3dCoord(newX+.0,newY+.0,z+999.0, 1)
-				
-				for _, player in pairs(players) do
-					Wait(1)
-					playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(player), true))
-					if newX > playerX - 60 and newX < playerX + 60 or newY > playerY - 60 and newY < playerY + 60 then
-						canSpawn = false
-						break
-					else
-						canSpawn = true
-					end
-				end
-			until canSpawn and newZ ~= 0
+			until newZ ~= 0
 
-			ped = CreatePed(4, GetHashKey(choosenPed), newX, newY, newZ, 0.0, true, true)
-			SetPedArmour(ped, 100)
-			SetPedAccuracy(ped, 25)
-			SetPedSeeingRange(ped, 300.0)
-			SetPedHearingRange(ped, 300.0)
 			
+			for i=1,3 do 
+				ped = CreatePed(4, GetHashKey(choosenPed), newX, newY, newZ, 0.0, true, true)
+				SetPedArmour(ped, 100)
+				SetPedAccuracy(ped, 35)
+				SetPedSeeingRange(ped, 100.0)
+				SetPedHearingRange(ped, 100.0)
+				
 
-			SetPedFleeAttributes(ped, 0, 0)
-   			SetPedCombatAttributes(ped, 16, 1)
-			SetPedCombatAttributes(ped, 17, 0)
-   			SetPedCombatAttributes(ped, 46, 1)
-			SetPedCombatAttributes(ped, 1424, 0)
-			SetPedCombatAttributes(ped, 5, 1)
-			SetPedCombatRange(ped,2)
-			SetAmbientVoiceName(ped, "ALIENS")
-			SetPedEnableWeaponBlocking(ped, true)
-			SetPedRelationshipGroupHash(ped, GetHashKey("zombeez"))
-			DisablePedPainAudio(ped, true)
-			SetPedDiesInWater(ped, false)
-			SetPedDiesWhenInjured(ped, false)
-		--	PlaceObjectOnGroundProperly(ped)
-			SetPedIsDrunk(ped, true)
-			SetPedConfigFlag(ped,100,1)
-			RequestAnimSet("move_m@drunk@verydrunk")
-			while not HasAnimSetLoaded("move_m@drunk@verydrunk") do
-				Wait(1)
-			end
-			SetPedMovementClipset(ped, "move_m@drunk@verydrunk", 1.0)
-			ApplyPedDamagePack(ped,"BigHitByVehicle", 0.0, 9.0)
-			ApplyPedDamagePack(ped,"SCR_Dumpster", 0.0, 9.0)
-			ApplyPedDamagePack(ped,"SCR_Torture", 0.0, 9.0)
-			StopPedSpeaking(ped,true)
-
+				SetPedFleeAttributes(ped, 0, 0)
+				SetPedCombatAttributes(ped, 0, 1)
+				SetPedCombatAttributes(ped, 16, 1)
+				SetPedCombatAttributes(ped, 46, 1)
+				SetPedCombatAttributes(ped, 1424, 1)
+				SetPedCombatAttributes(ped, 5, 1)
+				SetPedCombatRange(ped,2)
+			SetPedRelationshipGroupHash(ped, GetHashKey("bandit"))
 			--TaskCombatPed(ped, GetPlayerPed(-1), 0, 16)
 			x, y, z = table.unpack(GetEntityCoords(ped, true))
+			if i == 1 then
 			TaskWanderStandard(ped, 1.0, 10)
-
-
-			table.insert(peds, ped)
+			else
+			TaskGoToEntity(ped, bandits[1], -1, 0.0, 30,1073741824, 0)
+			end
+				randomWep = math.random(1, #pedWeps)
+				GiveWeaponToPed(ped, GetHashKey(pedWeps[randomWep]), 9999, true, true)
+				
+				
+			table.insert(bandits, ped)
+			Citizen.Trace("Spawned Bandit")
+			end
 		end
 
-		for i, ped in pairs(peds) do
+		for i, ped in pairs(bandits) do
+				playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
+				pedX, pedY = table.unpack(GetEntityCoords(ped, true))
 			if not DoesEntityExist(ped) then
-				table.remove(peds, i)
+				table.remove(bandits, i)
 			elseif IsPedDeadOrDying(ped, 1) then
 				-- Set ped as no longer needed for despawning
 				Citizen.InvokeNative(0xB736A491E64A32CF, Citizen.PointerValueIntInitialized(ped))
-			table.remove(peds, i)
+			table.remove(bandits, i)
 			else
-				playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
-				pedX, pedY = table.unpack(GetEntityCoords(ped, true))
-			SetPedArmour(ped, 100)
-			SetPedAccuracy(ped, 25)
-			SetPedSeeingRange(ped, 300.0)
-			SetPedHearingRange(ped, 300.0)
-
-			SetPedFleeAttributes(ped, 0, 0)
-   			SetPedCombatAttributes(ped, 16, 1)
-			SetPedCombatAttributes(ped, 17, 0)
-   			SetPedCombatAttributes(ped, 46, 1)
-			SetPedCombatAttributes(ped, 1424, 0)
-			SetPedCombatAttributes(ped, 5, 1)
-			SetPedCombatRange(ped,2)
-			SetAmbientVoiceName(ped, "ALIENS")
-			SetPedEnableWeaponBlocking(ped, true)
-			SetPedRelationshipGroupHash(ped, GetHashKey("zombeez"))
-			DisablePedPainAudio(ped, true)
-			SetPedDiesInWater(ped, false)
-			SetPedDiesWhenInjured(ped, false)
-				if pedX < playerX - 400 or pedX > playerX + 400 or pedY < playerY - 400 or pedY > playerY + 400 then
+			
+				if pedX < playerX - 2000 or pedX > playerX + 2000 or pedY < playerY - 2000 or pedY > playerY + 2000 then
 					-- Set ped as no longer needed for despawning
 					local model = GetEntityModel(ped)
 					SetEntityAsNoLongerNeeded(ped)
 					SetModelAsNoLongerNeeded(model)
-					table.remove(peds, i)
+					table.remove(bandits, i)
 				end
 			end
 		end
 	end
 end)
 
+
+function DistanceBetweenCoords(ent1, ent2)
+    local x1,y1,z1 = table.unpack(ent1)
+    local x2,y2,z2 = table.unpack(ent2)
+    local deltax = x1 - x2
+    local deltay = y1 - y2
+    local deltaz = y1 - y2
+    
+    dist = math.sqrt((deltax * deltax) + (deltay * deltay) + (deltaz * deltaz))
+    xout = math.abs(deltax)
+    yout = math.abs(deltay)
+    zout = math.abs(deltaz)
+    result = {distance = dist, x = xout, y = yout, z = zout}
+    
+    return result
+end
+
+-- debug stuff
+Citizen.CreateThread(function()
+while true do
+	Citizen.Wait(0)
+	for i, ped in pairs(bandits) do
+				playerX, playerY, playerZ = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
+				pedX, pedY, pedZ = table.unpack(GetEntityCoords(ped, true))
+		DrawLine(playerX,playerY, playerZ, pedX, pedY, pedZ, 0,255,0,255)
+	end
+end
+end) --]]
+
 RegisterNetEvent("Z:cleanup")
 AddEventHandler("Z:cleanup", function()
-	for i, ped in pairs(peds) do
+	for i, ped in pairs(bandits) do
 		-- Set ped as no longer needed for despawning
 		local model = GetEntityModel(ped)
 		SetEntityAsNoLongerNeeded(ped)
 		SetModelAsNoLongerNeeded(model)
 
-		table.remove(peds, i)
+		table.remove(bandits, i)
 	end
 end)
