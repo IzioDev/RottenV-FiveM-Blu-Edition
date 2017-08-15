@@ -399,9 +399,9 @@ Citizen.CreateThread(function()
 			repeat
 				Wait(1)
 				
-				newX = x + math.random(-2000, 2000)
-				newY = y + math.random(-2000, 2000)
-				_,newZ = GetGroundZFor_3dCoord(newX+.0,newY+.0,z+999.0, 1)
+				local	newX = x + math.random(-2000, 2000)
+				local	newY = y + math.random(-2000, 2000)
+				local	_,newZ = GetGroundZFor_3dCoord(newX+.0,newY+.0,z+999.0, 1)
 			until newZ ~= 0
 			
 			
@@ -438,8 +438,8 @@ Citizen.CreateThread(function()
 		end
 		
 		for i, ped in pairs(bandits) do
-			playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
-			pedX, pedY = table.unpack(GetEntityCoords(ped, true))
+			local	playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
+			local	pedX, pedY = table.unpack(GetEntityCoords(ped, true))
 			if not DoesEntityExist(ped) then
 				table.remove(bandits, i)
 			elseif IsPedDeadOrDying(ped, 1) then

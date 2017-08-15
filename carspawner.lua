@@ -520,9 +520,9 @@ Citizen.CreateThread(function()
 			repeat
 				Wait(1)
 				
-				newX = x + math.random(-1600, 1600)
-				newY = y + math.random(-1600, 1600)
-				_,newZ = GetGroundZFor_3dCoord(newX+.0,newY+.0,z+999.0, 1)
+				local	newX = x + math.random(-1600, 1600)
+				local	newY = y + math.random(-1600, 1600)
+				local	_,newZ = GetGroundZFor_3dCoord(newX+.0,newY+.0,z+999.0, 1)
 				
 				for _, player in pairs(players) do
 					Wait(1)
@@ -554,8 +554,8 @@ Citizen.CreateThread(function()
 			if not DoesEntityExist(car) then
 				table.remove(cars, i)
 			else
-				playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
-				carX, carY = table.unpack(GetEntityCoords(car, false))
+				local	playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
+				local	carX, carY = table.unpack(GetEntityCoords(car, false))
 				
 				if carX < playerX - 1600 or carX > playerX + 1600 or carY < playerY - 1600 or carY > playerY + 1600 then
 					-- Set car as no longer needed for despawning

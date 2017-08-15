@@ -96,9 +96,9 @@ Citizen.CreateThread(function()
 				
 				repeat
 					Wait(1)
-					newX = x + math.random(-300, 300)
-					newY = y + math.random(-300, 300)
-					_,newZ = GetGroundZFor_3dCoord(newX+.0,newY+.0,z+9999.0, 1)
+					local	newX = x + math.random(-300, 300)
+					local	newY = y + math.random(-300, 300)
+					local	_,newZ = GetGroundZFor_3dCoord(newX+.0,newY+.0,z+9999.0, 1)
 				until newZ ~= 0
 				
 				newZ = newZ+1.5
@@ -114,11 +114,11 @@ Citizen.CreateThread(function()
 				end
 			until canSpawn
 			
-			choosenWeapon = spawnableWeapons[math.random(1, #spawnableWeapons)]
-			choosenWeapon = string.upper(choosenWeapon)
-			chance = math.random(100,1000)
-			chance = chance/100
-			weapon = CreatePickupRotate(GetHashKey(choosenWeapon), newX, newY, newZ, 0.0, 0.0, 0.0, 8, chance, 24, 24, true, GetHashKey(choosenWeapon))
+			local choosenWeapon = spawnableWeapons[math.random(1, #spawnableWeapons)]
+			local choosenWeapon = string.upper(choosenWeapon)
+			local chance = math.random(100,1000)
+			local chance = chance/100
+			local weapon = CreatePickupRotate(GetHashKey(choosenWeapon), newX, newY, newZ, 0.0, 0.0, 0.0, 8, chance, 24, 24, true, GetHashKey(choosenWeapon))
 			--	SetEntityDynamic(weapon, true)
 			SetEntityRecordsCollisions(weapon, true)
 			SetEntityHasGravity(weapon, false)
@@ -126,7 +126,7 @@ Citizen.CreateThread(function()
 			SetEntityVelocity(weapon, 0.0, 0.0, -0.2)
 			
 			
-			weaponInfo = {weapon = weapon, x = newX, y = newY, z = newZ}
+			local weaponInfo = {weapon = weapon, x = newX, y = newY, z = newZ}
 			table.insert(weapons, weaponInfo)
 		end
 		
@@ -134,9 +134,9 @@ Citizen.CreateThread(function()
 			if not DoesPickupExist(weaponInfo.weapon) or HasPickupBeenCollected(weaponInfo.weapon) then
 				table.remove(weapons, i)
 			else
-				playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
-				weaponX = weaponInfo.x
-				weaponY = weaponInfo.y
+				local	playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
+				local 	weaponX = weaponInfo.x
+				local 	weaponY = weaponInfo.y
 				
 				if weaponX < playerX - 400 or weaponX > playerX + 400 or weaponY < playerY - 400 or weaponY > playerY + 400 then
 					-- Set weapon as no longer needed for despawning
