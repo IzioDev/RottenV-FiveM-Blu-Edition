@@ -54,6 +54,7 @@ Citizen.CreateThread( function()
 		TriggerServerEvent("SavePlayerData",GetPlayerServerId(PlayerId()), posX,posY,posZ,hunger,thirst)
 		
 		Citizen.Trace("Saving PlayerData!")
+		SetTimeout(180000, initiateSave)
     end
     SetTimeout(180000, initiateSave)
 
