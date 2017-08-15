@@ -15,28 +15,28 @@ local forceFirstPerson = false
 -- CODE --
 Citizen.CreateThread(function()
 	SetBlackout(true)
-
+	
 	while true do
 		Wait(1)
-
+		
 		if forceFirstPerson then
 			SetFollowPedCamViewMode(4)
 		end
-
-        SetPlayerWantedLevel(PlayerId(), 0, false)
-        SetPlayerWantedLevelNow(PlayerId(), false)
-
+		
+		SetPlayerWantedLevel(PlayerId(), 0, false)
+		SetPlayerWantedLevelNow(PlayerId(), false)
+		
 		-- Thanks @Boss
 		if freezeWeather then
 			SetWeatherTypePersist(weather)
-        	SetWeatherTypeNowPersist(weather)
-       		SetWeatherTypeNow(weather)
-       		SetOverrideWeather(weather)
-       	end
-
-       	if freezeTime then
-       		NetworkOverrideClockTime(hours, minutes, 0)
-       	end
+			SetWeatherTypeNowPersist(weather)
+			SetWeatherTypeNow(weather)
+			SetOverrideWeather(weather)
+		end
+		
+		if freezeTime then
+			NetworkOverrideClockTime(hours, minutes, 0)
+		end
 	end
 end)
 

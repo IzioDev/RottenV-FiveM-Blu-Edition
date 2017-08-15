@@ -95,7 +95,7 @@ Citizen.CreateThread(function()
 				Wait(1)
 				
 				repeat
-				Wait(1)
+					Wait(1)
 					newX = x + math.random(-300, 300)
 					newY = y + math.random(-300, 300)
 					_,newZ = GetGroundZFor_3dCoord(newX+.0,newY+.0,z+9999.0, 1)
@@ -119,7 +119,7 @@ Citizen.CreateThread(function()
 			chance = math.random(100,1000)
 			chance = chance/100
 			weapon = CreatePickupRotate(GetHashKey(choosenWeapon), newX, newY, newZ, 0.0, 0.0, 0.0, 8, chance, 24, 24, true, GetHashKey(choosenWeapon))
-		--	SetEntityDynamic(weapon, true)
+			--	SetEntityDynamic(weapon, true)
 			SetEntityRecordsCollisions(weapon, true)
 			SetEntityHasGravity(weapon, false)
 			FreezeEntityPosition(weapon, true)
@@ -150,13 +150,13 @@ end)
 
 --[[ debug stuff
 Citizen.CreateThread(function()
-while true do
-	Citizen.Wait(0)
-	for i, weaponInfo in pairs(weapons) do
-		playerX, playerY, playerZ = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
-		DrawLine(playerX,playerY, playerZ, weaponInfo.x, weaponInfo.y, weaponInfo.z, 0,255,0,255)
+	while true do
+		Citizen.Wait(0)
+		for i, weaponInfo in pairs(weapons) do
+			playerX, playerY, playerZ = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
+			DrawLine(playerX,playerY, playerZ, weaponInfo.x, weaponInfo.y, weaponInfo.z, 0,255,0,255)
+		end
 	end
-end
 end) ]]
 
 

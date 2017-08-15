@@ -17,8 +17,8 @@ Citizen.CreateThread(function()
 end)
 
 local welcomed = false
-		DecorRegister("hunger",1)
-		DecorRegister("thirst",1)
+DecorRegister("hunger",1)
+DecorRegister("thirst",1)
 AddEventHandler("playerSpawned", function(spawn)
 	if spawnWithFlashlight then
 		GiveWeaponToPed(GetPlayerPed(-1), GetHashKey("WEAPON_FLASHLIGHT"), 1, false, false)
@@ -37,7 +37,7 @@ Citizen.CreateThread(function()
 		end
 	end
 end)
-		
+
 
 Citizen.CreateThread(function()
 	while true do

@@ -1,8 +1,8 @@
 -- Thanks to @nobody
 Citizen.CreateThread(function()
 	while true do
-    	-- These natives has to be called every frame.
-    	SetVehicleDensityMultiplierThisFrame(0.0)
+		-- These natives has to be called every frame.
+		SetVehicleDensityMultiplierThisFrame(0.0)
 		SetPedDensityMultiplierThisFrame(0.0)
 		SetRandomVehicleDensityMultiplierThisFrame(0.0)
 		SetParkedVehicleDensityMultiplierThisFrame(0.0)
@@ -15,7 +15,7 @@ Citizen.CreateThread(function()
 		-- These natives do not have to be called everyframe.
 		SetGarbageTrucks(0)
 		SetRandomBoats(0)
-    	
+		
 		Citizen.Wait(1)
 	end
 end)

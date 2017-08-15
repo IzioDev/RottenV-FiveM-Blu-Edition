@@ -569,14 +569,14 @@ end)
 
 --[[ debug stuff
 Citizen.CreateThread(function()
-while true do
-	Citizen.Wait(0)
-	for i, car in pairs(cars) do
-		playerX, playerY, playerZ = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
-		carX, carY, carZ = table.unpack(GetEntityCoords(car, false))
-		DrawLine(playerX,playerY, playerZ, carX, carY, carZ, 255,0,0,255)
+	while true do
+		Citizen.Wait(0)
+		for i, car in pairs(cars) do
+			playerX, playerY, playerZ = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
+			carX, carY, carZ = table.unpack(GetEntityCoords(car, false))
+			DrawLine(playerX,playerY, playerZ, carX, carY, carZ, 255,0,0,255)
+		end
 	end
-end
 end) ]]
 
 RegisterNetEvent("Z:cleanup")
