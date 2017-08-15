@@ -353,11 +353,11 @@ Citizen.CreateThread(function()
 	while true do
 		Wait(1)
 		
-		if #peds < 120 then
-			local	x, y, z = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
+		if #peds < 30 then
+			x, y, z = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
 			
-			local	choosenPed = pedModels[math.random(1, #pedModels)]
-			local	choosenPed = string.upper(choosenPed)
+			choosenPed = pedModels[math.random(1, #pedModels)]
+			choosenPed = string.upper(choosenPed)
 			RequestModel(GetHashKey(choosenPed))
 			while not HasModelLoaded(GetHashKey(choosenPed)) or not HasCollisionForModelLoaded(GetHashKey(choosenPed)) do
 				Wait(1)
@@ -366,8 +366,8 @@ Citizen.CreateThread(function()
 			repeat
 				Wait(1)
 				
-				local	newX = x + math.random(-300, 300)
-				local	newY = y + math.random(-300, 300)
+				newX = x + math.random(-300, 300)
+				newY = y + math.random(-300, 300)
 				_,newZ = GetGroundZFor_3dCoord(newX+.0,newY+.0,z+999.0, 1)
 				
 				for _, player in pairs(players) do
@@ -382,7 +382,7 @@ Citizen.CreateThread(function()
 				end
 			until canSpawn and newZ ~= 0
 			
-			local	ped = CreatePed(4, GetHashKey(choosenPed), newX, newY, newZ, 0.0, true, true)
+			ped = CreatePed(4, GetHashKey(choosenPed), newX, newY, newZ, 0.0, true, true)
 			SetPedArmour(ped, 100)
 			SetPedAccuracy(ped, 25)
 			SetPedSeeingRange(ped, 300.0)
@@ -431,8 +431,8 @@ Citizen.CreateThread(function()
 				Citizen.InvokeNative(0xB736A491E64A32CF, Citizen.PointerValueIntInitialized(ped))
 				table.remove(peds, i)
 			else
-				local	playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
-				local	pedX, pedY = table.unpack(GetEntityCoords(ped, true))
+				playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
+				pedX, pedY = table.unpack(GetEntityCoords(ped, true))
 				SetPedArmour(ped, 100)
 				SetPedAccuracy(ped, 25)
 				SetPedSeeingRange(ped, 300.0)

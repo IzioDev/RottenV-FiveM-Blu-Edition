@@ -26,6 +26,8 @@ AddEventHandler("playerSpawned", function(spawn)
 		GiveWeaponToPed(GetPlayerPed(-1), 0xFBAB5776, true)
 		DecorSetFloat(GetPlayerPed(-1), "hunger", 100.0)
 		DecorSetFloat(GetPlayerPed(-1), "thirst", 100.0)
+	    NetworkSetFriendlyFireOption(true)
+		SetCanAttackFriendly(GetPlayerPed(-1), true, true)
 	end
 end)
 

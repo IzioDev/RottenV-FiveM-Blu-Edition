@@ -96,9 +96,9 @@ Citizen.CreateThread(function()
 				
 				repeat
 					Wait(1)
-					local	newX = x + math.random(-300, 300)
-					local	newY = y + math.random(-300, 300)
-					local	_,newZ = GetGroundZFor_3dCoord(newX+.0,newY+.0,z+9999.0, 1)
+					newX = x + math.random(-300, 300)
+					newY = y + math.random(-300, 300)
+					_,newZ = GetGroundZFor_3dCoord(newX+.0,newY+.0,z+9999.0, 1)
 				until newZ ~= 0
 				
 				newZ = newZ+1.5
@@ -114,11 +114,11 @@ Citizen.CreateThread(function()
 				end
 			until canSpawn
 			
-			local choosenWeapon = spawnableWeapons[math.random(1, #spawnableWeapons)]
-			local choosenWeapon = string.upper(choosenWeapon)
+			choosenWeapon = spawnableWeapons[math.random(1, #spawnableWeapons)]
+			choosenWeapon = string.upper(choosenWeapon)
 			local chance = math.random(100,1000)
 			local chance = chance/100
-			local weapon = CreatePickupRotate(GetHashKey(choosenWeapon), newX, newY, newZ, 0.0, 0.0, 0.0, 8, chance, 24, 24, true, GetHashKey(choosenWeapon))
+			weapon = CreatePickupRotate(GetHashKey(choosenWeapon), newX, newY, newZ, 0.0, 0.0, 0.0, 8, chance, 24, 24, true, GetHashKey(choosenWeapon))
 			--	SetEntityDynamic(weapon, true)
 			SetEntityRecordsCollisions(weapon, true)
 			SetEntityHasGravity(weapon, false)

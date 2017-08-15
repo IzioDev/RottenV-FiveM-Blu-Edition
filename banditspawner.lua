@@ -399,9 +399,9 @@ Citizen.CreateThread(function()
 			repeat
 				Wait(1)
 				
-				local	newX = x + math.random(-2000, 2000)
-				local	newY = y + math.random(-2000, 2000)
-				local	_,newZ = GetGroundZFor_3dCoord(newX+.0,newY+.0,z+999.0, 1)
+				newX = x + math.random(-2000, 2000)
+				newY = y + math.random(-2000, 2000)
+				_,newZ = GetGroundZFor_3dCoord(newX+.0,newY+.0,z+999.0, 1)
 			until newZ ~= 0
 			
 			
