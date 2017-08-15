@@ -44,7 +44,9 @@ Citizen.CreateThread( function()
 	end
 	end)
 	
-    SetTimeout(180000, function()
+	
+	
+	function initiateSave()
 		local playerPed = GetPlayerPed(-1)
         local posX,posY,posZ = table.unpack(GetEntityCoords(playerPed,true))
 		local hunger = DecorGetFloat(GetPlayerPed(-1),"hunger")
@@ -53,7 +55,9 @@ Citizen.CreateThread( function()
 		
 		TriggerServerEvent("SavePlayerData",GetPlayerServerId(PlayerId()), posX,posY,posZ,hunger,thirst)
 		
-    end)
+		Citizen.Trace("Saving PlayerData!")
+    end
+    SetTimeout(180000, initiateSave)
 
 	
 function mysplit(inputstr, sep)
