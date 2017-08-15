@@ -26,12 +26,10 @@ Citizen.CreateThread( function()
 		index = 0
 		for _,theWeapon in ipairs(weaponTable) do 
 		index = index +1
-		Citizen.Trace(weaponTable.ammo[index])
 			GiveWeaponToPed(playerPed, GetHashKey(theWeapon), weaponTable.ammo[index], true, true)
 		end
 		DecorSetFloat(playerPed, "hunger", hunger)
 		DecorSetFloat(playerPed, "thirst", thirst)
-		GetPedWeapontypeInSlot(playerPed,1)
 		Citizen.Trace("Done!")
 	end)
 	
