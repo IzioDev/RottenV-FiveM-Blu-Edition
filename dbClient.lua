@@ -31,6 +31,7 @@ Citizen.CreateThread( function()
 		end
 		DecorSetFloat(playerPed, "hunger", hunger)
 		DecorSetFloat(playerPed, "thirst", thirst)
+		GetPedWeapontypeInSlot(playerPed,1)
 		Citizen.Trace("Done!")
 	end)
 	
@@ -43,12 +44,17 @@ Citizen.CreateThread( function()
 	end
 	end)
 	
---	AddEventHandler("playerSpawned", function()
---		TriggerServerEvent("spawnPlayer", GetPlayerServerId(PlayerId()))
---		Citizen.Trace("Requesting Spawn!")
---		Citizen.Trace("Sent!")
---	end)
-	
+    SetTimeout(180000, function()
+		local playerPed = GetPlayerPed(-1)
+        local posX,posY,posZ = table.unpack(GetEntityCoords(playerPed,true))
+		local hunger = DecorGetFloat(GetPlayerPed(-1),"hunger")
+		local thirst = DecorGetFloat(GetPlayerPed(-1),"thirst")
+		-- weapons not yet implemented
+		
+		TriggerServerEvent("SavePlayerData",GetPlayerServerId(PlayerId()), posX,posY,posZ,hunger,thirst)
+		
+    end)
+
 	
 function mysplit(inputstr, sep)
         if sep == nil then
@@ -61,6 +67,5 @@ function mysplit(inputstr, sep)
         end
         return t
 end
-	
 end)
 

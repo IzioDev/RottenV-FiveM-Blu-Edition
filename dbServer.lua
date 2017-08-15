@@ -1,4 +1,5 @@
 RegisterServerEvent('spawnPlayer')
+RegisterServerEvent('SavePlayerData')
 Citizen.CreateThread(function()
 		AddEventHandler('spawnPlayer', function(client)
 		print("Client Requested Spawn!")
@@ -11,8 +12,8 @@ Citizen.CreateThread(function()
 			end)
 	end)
 	
-		AddEventHandler("onPlayerWasted", function(client)
-		
+		AddEventHandler("SavePlayerData", function(client,posX,posY,posZ,hunger,thirst,weapons)
+		MySQL.Async.execute('UPDATE players SET x="'..posX..'" y="'..posY..'" z="'..posZ..'" hunger="'..hunger..'" thirst="'..thirst..'" WHERE steamid="'..GetPlayerIdentifier(client,0)..'"', {}, function() end)
 		end)
 end)
 
