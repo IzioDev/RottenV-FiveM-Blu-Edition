@@ -19,6 +19,7 @@ Citizen.CreateThread( function()
 			if not tonumber(value) then
 				weaponTable[index] = value
 			else
+				value = tonumber(value)
 				weaponTable.ammo[index] = value
 			end
 		end
