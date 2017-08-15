@@ -17,6 +17,12 @@ local pedWeps =
 	"WEAPON_ADVANCEDRIFLE",
 	"WEAPON_ASSAULTSMG",
 	"WEAPON_ASSAULTRIFLE"
+	"weapon_Pistol_Mk2",
+	"weapon_AssaultRifle_Mk2",
+	"weapon_CarbineRifle_Mk2",
+	"weapon_CombatMG_Mk2",
+	"weapon_HeavySniper_Mk2",
+	"weapon_SMG_Mk2",
 }
 
 local pedModels = 

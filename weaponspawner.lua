@@ -63,12 +63,12 @@ local spawnableWeapons =
 	"pickup_weapon_PipeBomb",
 	"pickup_weapon_PoolCue",
 	"pickup_weapon_Wrench",
-	"pickup_weapon_PistolMk2",
-	"pickup_weapon_AssaultRifleMk2",
-	"pickup_weapon_CarbineRifleMk2",
-	"pickup_weapon_CombatMGMk2",
-	"pickup_weapon_HeavySniperMk2",
-	"pickup_weapon_SMGMk2",
+	"pickup_weapon_Pistol_Mk2",
+	"pickup_weapon_AssaultRifle_Mk2",
+	"pickup_weapon_CarbineRifle_Mk2",
+	"pickup_weapon_CombatMG_Mk2",
+	"pickup_weapon_HeavySniper_Mk2",
+	"pickup_weapon_SMG_Mk2",
 	"PICKUP_HEALTH_STANDARD"
 }
 

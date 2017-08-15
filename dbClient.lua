@@ -12,8 +12,6 @@ Citizen.CreateThread( function()
 		index = 0
 		for _,value in ipairs(mysplit(weapons, "|")) do 
 			index = index + 1
-			weaponTable[index] = value
-		--	Citizen.Trace("Got Gun:"..value)
 		
 		for _,value in ipairs(mysplit(value, ":")) do 
 			if not tonumber(value) then
