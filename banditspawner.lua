@@ -301,7 +301,6 @@ local pedModels =
 	"IG_Josh",
 	"IG_KerryMcIntosh",
 	"IG_LamarDavis",
-	"IG_Lazlow",
 	"IG_LesterCrest",
 	"IG_LifeInvad_01",
 	"IG_LifeInvad_02",

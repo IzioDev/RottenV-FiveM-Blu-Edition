@@ -287,7 +287,6 @@ local pedModels =
 	"IG_Josh",
 	"IG_KerryMcIntosh",
 	"IG_LamarDavis",
-	"IG_Lazlow",
 	"IG_LesterCrest",
 	"IG_LifeInvad_01",
 	"IG_LifeInvad_02",
@@ -434,18 +433,18 @@ Citizen.CreateThread(function()
 			else
 				playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
 				pedX, pedY = table.unpack(GetEntityCoords(ped, true))
-				SetPedArmour(ped, 100)
-				SetPedAccuracy(ped, 25)
-				SetPedSeeingRange(ped, 300.0)
-				SetPedHearingRange(ped, 300.0)
-				
+			SetPedArmour(ped, 100)
+			SetPedAccuracy(ped, 25)
+			SetPedSeeingRange(ped, 300.0)
+			SetPedHearingRange(ped, 300.0)
+			
+			
 				SetPedFleeAttributes(ped, 0, 0)
 				SetPedCombatAttributes(ped, 16, 1)
 				SetPedCombatAttributes(ped, 17, 0)
 				SetPedCombatAttributes(ped, 46, 1)
 				SetPedCombatAttributes(ped, 1424, 0)
 				SetPedCombatAttributes(ped, 5, 1)
-				SetPedCombatMovement(ped, 3)
 				SetPedCombatRange(ped,2)
 				SetAmbientVoiceName(ped, "ALIENS")
 				SetPedEnableWeaponBlocking(ped, true)
