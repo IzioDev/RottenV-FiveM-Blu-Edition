@@ -5,7 +5,7 @@ local freezeWeather = false
 local weather = "FOGGY"
 
 -- Allows you to set if time should be frozen and what time
-local freezeTime = true
+local freezeTime = false
 local hours = 11
 local minutes = 0
 
