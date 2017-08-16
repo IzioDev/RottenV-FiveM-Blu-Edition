@@ -366,8 +366,8 @@ Citizen.CreateThread(function()
 			repeat
 				Wait(1)
 				
-				newX = x + math.random(-300, 300)
-				newY = y + math.random(-300, 300)
+				newX = x + math.random(-200, 200)
+				newY = y + math.random(-200, 200)
 				_,newZ = GetGroundZFor_3dCoord(newX+.0,newY+.0,z+999.0, 1)
 				
 				for _, player in pairs(players) do
@@ -380,7 +380,7 @@ Citizen.CreateThread(function()
 						canSpawn = true
 					end
 				end
-			until canSpawn and newZ ~= 0
+			until canSpawn
 			
 			ped = CreatePed(4, GetHashKey(choosenPed), newX, newY, newZ, 0.0, true, true)
 			SetPedArmour(ped, 100)
@@ -452,7 +452,7 @@ Citizen.CreateThread(function()
 				DisablePedPainAudio(ped, true)
 				SetPedDiesInWater(ped, false)
 				SetPedDiesWhenInjured(ped, false)
-				if pedX < playerX - 400 or pedX > playerX + 400 or pedY < playerY - 400 or pedY > playerY + 400 then
+				if pedX < playerX - 300 or pedX > playerX + 300 or pedY < playerY - 300 or pedY > playerY + 300 then
 					-- Set ped as no longer needed for despawning
 					local model = GetEntityModel(ped)
 					SetEntityAsNoLongerNeeded(ped)

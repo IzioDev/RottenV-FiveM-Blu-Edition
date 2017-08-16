@@ -520,10 +520,15 @@ Citizen.CreateThread(function()
 			repeat
 				Wait(1)
 				
-				local	newVehicleX = x + math.random(-1600, 1600)
-				local	NewVehicleY = y + math.random(-1600, 1600)
-				local	_,NewVehicleZ = GetGroundZFor_3dCoord(newVehicleX+.0,NewVehicleY+.0,z+999.0, 1)
+				repeat
+				Wait(1)
+					newVehicleX = x + math.random(-1000, 1000)
+					NewVehicleY = y + math.random(-1000, 1000)
+					_,NewVehicleZ = GetGroundZFor_3dCoord(newVehicleX+.0,NewVehicleY+.0,z+999.0, 1)
+				until NewVehicleZ ~= 0
+				canSpawn = true
 				
+--[[
 				for _, player in pairs(players) do
 					Wait(1)
 					playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(player), true))
@@ -534,8 +539,9 @@ Citizen.CreateThread(function()
 						canSpawn = true
 					end
 				end
+				--]]
 			until canSpawn
-			
+
 			choosenCar = spawnableCars[math.random(1, #spawnableCars)]
 			RequestModel(choosenCar)
 			while not HasModelLoaded(choosenCar) or not HasCollisionForModelLoaded(choosenCar) do
@@ -557,7 +563,7 @@ Citizen.CreateThread(function()
 				local	playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
 				local	carX, carY = table.unpack(GetEntityCoords(car, false))
 				
-				if carX < playerX - 1600 or carX > playerX + 1600 or carY < playerY - 1600 or carY > playerY + 1600 then
+				if carX < playerX - 1000 or carX > playerX + 1000 or carY < playerY - 1000 or carY > playerY + 1000 then
 					-- Set car as no longer needed for despawning
 					Citizen.InvokeNative(0xB736A491E64A32CF, Citizen.PointerValueIntInitialized(car))
 					table.remove(cars, i)
