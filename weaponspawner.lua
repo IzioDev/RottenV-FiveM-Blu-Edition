@@ -121,14 +121,16 @@ Citizen.CreateThread(function()
 			local chance = chance/100
 			weapon = CreatePickupRotate(GetHashKey(choosenWeapon), NewWeaponX, NewWeaponY, NewWeaponZ, 0.0, 0.0, 0.0, 8, chance, 24, 24, true, GetHashKey(choosenWeapon))
 			--	SetEntityDynamic(weapon, true)
-			SetEntityRecordsCollisions(weapon, true)
-			SetEntityHasGravity(weapon, false)
-			FreezeEntityPosition(weapon, true)
-			SetEntityVelocity(weapon, 0.0, 0.0, -0.2)
+			if DoesPickupExist(weapon) then
+				Citizen.Trace(weapon)
+				SetEntityRecordsCollisions(weapon, true)
+				SetEntityHasGravity(weapon, false)
+				FreezeEntityPosition(weapon, true)
+				SetEntityVelocity(weapon, 0.0, 0.0, -0.2)
+				local weaponInfo = {weapon = weapon, x = NewWeaponX, y = NewWeaponY, z = NewWeaponZ}
+				table.insert(weapons, weaponInfo)
+			end
 			
-			
-			local weaponInfo = {weapon = weapon, x = NewWeaponX, y = NewWeaponY, z = NewWeaponZ}
-			table.insert(weapons, weaponInfo)
 		end
 		
 		for i, weaponInfo in pairs(weapons) do
@@ -141,7 +143,9 @@ Citizen.CreateThread(function()
 				
 				if weaponX < playerX - 400 or weaponX > playerX + 400 or weaponY < playerY - 400 or weaponY > playerY + 400 then
 					-- Set weapon as no longer needed for despawning
-					Citizen.InvokeNative(0xB736A491E64A32CF, Citizen.PointerValueIntInitialized(weaponInfo.weapon))
+					if DoesPickupExist(weaponInfo.weapon) then
+						Citizen.InvokeNative(0xB736A491E64A32CF, Citizen.PointerValueIntInitialized(weaponInfo.weapon))
+					end
 					table.remove(weapons, i)
 				end
 			end
@@ -168,7 +172,9 @@ RegisterNetEvent("Z:cleanup")
 AddEventHandler("Z:cleanup", function()
 	for i, weapon in pairs(weapons) do
 		-- Set weapon as no longer needed for despawning
-		Citizen.InvokeNative(0xB736A491E64A32CF, Citizen.PointerValueIntInitialized(weapon))
+		if DoesPickupExist(weapon) then
+			Citizen.InvokeNative(0xB736A491E64A32CF, Citizen.PointerValueIntInitialized(weapon))
+		end
 		table.remove(weapons, i)
 	end
 end)

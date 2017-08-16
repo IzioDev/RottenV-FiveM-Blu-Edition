@@ -401,13 +401,10 @@ Citizen.CreateThread(function()
 				Wait(1)
 			end
 			
-			repeat
-				Wait(1)
 				
 				newBanditX = x + math.random(-2000, 2000)
 				newBanditY = y + math.random(-2000, 2000)
 				_,newBanditZ = GetGroundZFor_3dCoord(newBanditX+.0,newBanditY+.0,z+999.0, 1)
-			until newBanditZ ~= 0
 			
 			
 			for i=1,3 do 
@@ -426,6 +423,7 @@ Citizen.CreateThread(function()
 				SetPedCombatAttributes(ped, 5, 1)
 				SetPedCombatMovement(ped, 3)
 				SetPedCombatRange(ped,2)
+				SetPedDiesInstantlyInWater(ped,true)
 				SetPedRelationshipGroupHash(ped, GetHashKey("bandit"))
 				--TaskCombatPed(ped, GetPlayerPed(-1), 0, 16)
 				x, y, z = table.unpack(GetEntityCoords(ped, true))
