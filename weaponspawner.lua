@@ -170,8 +170,9 @@ end)
 
 RegisterNetEvent("Z:cleanup")
 AddEventHandler("Z:cleanup", function()
-	for i, weapon in pairs(weapons) do
+	for i, weaponInfo in pairs(weapons) do
 		-- Set weapon as no longer needed for despawning
+		weapon = weaponInfo.weapon
 		if DoesPickupExist(weapon) then
 			Citizen.InvokeNative(0xB736A491E64A32CF, Citizen.PointerValueIntInitialized(weapon))
 		end
