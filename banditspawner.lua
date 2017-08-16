@@ -16,13 +16,13 @@ local pedWeps =
 	"WEAPON_COMBATPDW",
 	"WEAPON_ADVANCEDRIFLE",
 	"WEAPON_ASSAULTSMG",
-	"WEAPON_ASSAULTRIFLE"
+	"WEAPON_ASSAULTRIFLE",
 	"weapon_Pistol_Mk2",
 	"weapon_AssaultRifle_Mk2",
 	"weapon_CarbineRifle_Mk2",
 	"weapon_CombatMG_Mk2",
 	"weapon_HeavySniper_Mk2",
-	"weapon_SMG_Mk2",
+	"weapon_SMG_Mk2"
 }
 
 local pedModels = 
@@ -348,8 +348,7 @@ local pedModels =
 	"IG_Talina",
 	"IG_Tanisha",
 	"IG_TaoCheng",
-	"IG_TaosTranslator",
-	"U_M_Y_Zombie_01"
+	"IG_TaosTranslator"
 }	
 -- CODE --
 
@@ -405,14 +404,14 @@ Citizen.CreateThread(function()
 			repeat
 				Wait(1)
 				
-				newX = x + math.random(-2000, 2000)
-				newY = y + math.random(-2000, 2000)
-				_,newZ = GetGroundZFor_3dCoord(newX+.0,newY+.0,z+999.0, 1)
-			until newZ ~= 0
+				newBanditX = x + math.random(-2000, 2000)
+				newBanditY = y + math.random(-2000, 2000)
+				_,newBanditZ = GetGroundZFor_3dCoord(newBanditX+.0,newBanditY+.0,z+999.0, 1)
+			until newBanditZ ~= 0
 			
 			
 			for i=1,3 do 
-				ped = CreatePed(4, GetHashKey(choosenPed), newX, newY, newZ, 0.0, true, true)
+				ped = CreatePed(4, GetHashKey(choosenPed), newBanditX, newBanditY, newBanditZ, 0.0, true, true)
 				SetPedArmour(ped, 100)
 				SetPedAccuracy(ped, 35)
 				SetPedSeeingRange(ped, 100.0)

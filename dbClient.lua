@@ -1,5 +1,75 @@
 firstSpawn = true
 
+local weapons =
+{
+	"weapon_Knife",
+	"weapon_Nightstick",
+	"weapon_Hammer",
+	"weapon_Bat",
+	"weapon_GolfClub",
+	"weapon_Crowbar",
+	"weapon_Bottle",
+	"weapon_SwitchBlade",
+	"weapon_Pistol",
+	"weapon_CombatPistol",
+	"weapon_APPistol",
+	"weapon_Pistol50",
+	"weapon_FlareGun",
+	"weapon_MarksmanPistol",
+	"weapon_Revolver",
+	"weapon_MicroSMG",
+	"weapon_SMG",
+	"weapon_AssaultSMG",
+	"weapon_CombatPDW",
+	"weapon_AssaultRifle",
+	"weapon_CarbineRifle",
+	"weapon_AdvancedRifle",
+	"weapon_CompactRifle",
+	"weapon_MG",
+	"weapon_CombatMG",
+	"weapon_PumpShotgun",
+	"weapon_SawnOffShotgun",
+	"weapon_AssaultShotgun",
+	"weapon_BullpupShotgun",
+	"weapon_DoubleBarrelShotgun",
+	"weapon_StunGun",
+	"weapon_SniperRifle",
+	"weapon_HeavySniper",
+	"weapon_Grenade",
+	"weapon_StickyBomb",
+	"weapon_SmokeGrenade",
+	"weapon_Molotov",
+	"weapon_FireExtinguisher",
+	"weapon_PetrolCan",
+	"weapon_SNSPistol",
+	"weapon_SpecialCarbine",
+	"weapon_HeavyPistol",
+	"weapon_BullpupRifle",
+	"weapon_VintagePistol",
+	"weapon_Dagger",
+	"weapon_Musket",
+	"weapon_MarksmanRifle",
+	"weapon_HeavyShotgun",
+	"weapon_Gusenberg",
+	"weapon_Hatchet",
+	"weapon_KnuckleDuster",
+	"weapon_Machete",
+	"weapon_MachinePistol",
+	"weapon_Flashlight",
+	"weapon_SweeperShotgun",
+	"weapon_BattleAxe",
+	"weapon_MiniSMG",
+	"weapon_PipeBomb",
+	"weapon_PoolCue",
+	"weapon_Wrench",
+	"weapon_Pistol_Mk2",
+	"weapon_AssaultRifle_Mk2",
+	"weapon_CarbineRifle_Mk2",
+	"weapon_CombatMG_Mk2",
+	"weapon_HeavySniper_Mk2",
+	"weapon_SMG_Mk2",
+}
+
 Citizen.CreateThread( function()
 	RegisterNetEvent('loadPlayerIn')
 	AddEventHandler('loadPlayerIn', function(x,y,z,hunger,thirst,weapons) 
@@ -48,9 +118,19 @@ Citizen.CreateThread( function()
         local posX,posY,posZ = table.unpack(GetEntityCoords(playerPed,true))
 		local hunger = DecorGetFloat(GetPlayerPed(-1),"hunger")
 		local thirst = DecorGetFloat(GetPlayerPed(-1),"thirst")
-		-- weapons not yet implemented
+		local PedWeapons = ""
+		for _,theWeapon in ipairs(weapons) do
+			if HasPedGotWeapon(playerPed,GetHashKey(theWeapon),false) == 1 then
+				local ammo = GetAmmoInPedWeapon(playerPed, GetHashKey(theWeapon))
+				if string.len(PedWeapons) > 1 then
+					PedWeapons = PedWeapons.."|"..theWeapon..":"..ammo
+				else
+					PedWeapons = PedWeapons..""..theWeapon..":"..ammo
+				end
+			end
+		end
 		
-		TriggerServerEvent("SavePlayerData",GetPlayerServerId(PlayerId()), posX,posY,posZ,hunger,thirst)
+		TriggerServerEvent("SavePlayerData",GetPlayerServerId(PlayerId()), posX,posY,posZ,hunger,thirst,PedWeapons)
 		
 		Citizen.Trace("Saving PlayerData!")
 		SetTimeout(180000, initiateSave)

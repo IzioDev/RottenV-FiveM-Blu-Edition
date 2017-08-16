@@ -520,14 +520,14 @@ Citizen.CreateThread(function()
 			repeat
 				Wait(1)
 				
-				local	newX = x + math.random(-1600, 1600)
-				local	newY = y + math.random(-1600, 1600)
-				local	_,newZ = GetGroundZFor_3dCoord(newX+.0,newY+.0,z+999.0, 1)
+				local	newVehicleX = x + math.random(-1600, 1600)
+				local	NewVehicleY = y + math.random(-1600, 1600)
+				local	_,NewVehicleZ = GetGroundZFor_3dCoord(newVehicleX+.0,NewVehicleY+.0,z+999.0, 1)
 				
 				for _, player in pairs(players) do
 					Wait(1)
 					playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(player), true))
-					if newX > playerX - 200 and newX < playerX + 200 or newY > playerY - 200 and newY < playerY + 200 then
+					if newVehicleX > playerX - 200 and newVehicleX < playerX + 200 or NewVehicleY > playerY - 200 and NewVehicleY < playerY + 200 then
 						canSpawn = false
 						break
 					else
@@ -542,7 +542,7 @@ Citizen.CreateThread(function()
 				Wait(1)
 			end
 			
-			car = CreateVehicle(choosenCar, newX, newY, newZ, math.random(), true, true)
+			car = CreateVehicle(choosenCar, newVehicleX, NewVehicleY, NewVehicleZ, math.random(), true, true)
 			SetVehicleFuelLevel(car, math.random() + math.random(10, 80))
 			SetVehicleEngineHealth(car, math.random() + math.random(40, 99)*10)
 			PlaceObjectOnGroundProperly(car)
@@ -567,17 +567,17 @@ Citizen.CreateThread(function()
 	end
 end)
 
---[[ debug stuff
+
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
 		for i, car in pairs(cars) do
 			playerX, playerY, playerZ = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
 			carX, carY, carZ = table.unpack(GetEntityCoords(car, false))
-			DrawLine(playerX,playerY, playerZ, carX, carY, carZ, 255,0,0,255)
+		--	DrawLine(playerX,playerY, playerZ, carX, carY, carZ, 255.0,0.0,0.0,255.0)
 		end
 	end
-end) ]]
+end)
 
 RegisterNetEvent("Z:cleanup")
 AddEventHandler("Z:cleanup", function()

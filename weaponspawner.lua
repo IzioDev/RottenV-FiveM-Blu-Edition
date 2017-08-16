@@ -82,7 +82,8 @@ AddEventHandler("Z:playerUpdate", function(mPlayers)
 end)
 
 weapons = {}
-newz = 0.0
+weaponLights = {}
+NewWeaponZ = 0.0
 
 Citizen.CreateThread(function()
 	while true do
@@ -96,16 +97,16 @@ Citizen.CreateThread(function()
 				
 				repeat
 					Wait(1)
-					newX = x + math.random(-300, 300)
-					newY = y + math.random(-300, 300)
-					_,newZ = GetGroundZFor_3dCoord(newX+.0,newY+.0,z+9999.0, 1)
-				until newZ ~= 0
+					NewWeaponX = x + math.random(-300, 300)
+					NewWeaponY = y + math.random(-300, 300)
+					_,NewWeaponZ = GetGroundZFor_3dCoord(NewWeaponX+.0,NewWeaponY+.0,z+9999.0, 1)
+				until NewWeaponZ ~= 0 and NewWeaponZ < z+20
 				
-				newZ = newZ+1.5
+				NewWeaponZ = NewWeaponZ+1.5
 				for player, _ in pairs(players) do
 					Wait(1)
 					playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(player), true))
-					if newX > playerX - 60 and newX < playerX + 60 or newY > playerY - 60 and newY < playerY + 60 then
+					if NewWeaponX > playerX - 60 and NewWeaponX < playerX + 60 or NewWeaponY > playerY - 60 and NewWeaponY < playerY + 60 then
 						canSpawn = false
 						break
 					else
@@ -118,7 +119,7 @@ Citizen.CreateThread(function()
 			choosenWeapon = string.upper(choosenWeapon)
 			local chance = math.random(100,1000)
 			local chance = chance/100
-			weapon = CreatePickupRotate(GetHashKey(choosenWeapon), newX, newY, newZ, 0.0, 0.0, 0.0, 8, chance, 24, 24, true, GetHashKey(choosenWeapon))
+			weapon = CreatePickupRotate(GetHashKey(choosenWeapon), NewWeaponX, NewWeaponY, NewWeaponZ, 0.0, 0.0, 0.0, 8, chance, 24, 24, true, GetHashKey(choosenWeapon))
 			--	SetEntityDynamic(weapon, true)
 			SetEntityRecordsCollisions(weapon, true)
 			SetEntityHasGravity(weapon, false)
@@ -126,7 +127,7 @@ Citizen.CreateThread(function()
 			SetEntityVelocity(weapon, 0.0, 0.0, -0.2)
 			
 			
-			local weaponInfo = {weapon = weapon, x = newX, y = newY, z = newZ}
+			local weaponInfo = {weapon = weapon, x = NewWeaponX, y = NewWeaponY, z = NewWeaponZ}
 			table.insert(weapons, weaponInfo)
 		end
 		
@@ -148,16 +149,19 @@ Citizen.CreateThread(function()
 	end
 end)
 
---[[ debug stuff
+
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
 		for i, weaponInfo in pairs(weapons) do
+			local weapon = weaponInfo.weapon
+			local weaponX,weaponY,weaponZ = table.unpack(GetPickupCoords(weaponInfo.weapon))
 			playerX, playerY, playerZ = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
-			DrawLine(playerX,playerY, playerZ, weaponInfo.x, weaponInfo.y, weaponInfo.z, 0,255,0,255)
+	--		DrawLine(playerX,playerY, playerZ, weaponInfo.x, weaponInfo.y, weaponInfo.z, 0.0,255.0,0.0,255)
+			DrawLightWithRange(weaponX,weaponY,weaponZ+0.1, 1.0, 1.0, 1.0, 1.7, 0.001)
 		end
 	end
-end) ]]
+end) 
 
 
 RegisterNetEvent("Z:cleanup")
