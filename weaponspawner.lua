@@ -141,10 +141,8 @@ Citizen.CreateThread(function()
 				
 			if weaponX < playerX - 400 or weaponX > playerX + 400 or weaponY < playerY - 400 or weaponY > playerY + 400 then
 				-- Set weapon as no longer needed for despawning
-				if DoesPickupExist(weaponInfo.weapon) then
 					--Citizen.InvokeNative(0xB736A491E64A32CF, Citizen.PointerValueIntInitialized(weaponInfo.weapon))
-					RemovePickup(weaponInfo.weapon)
-				end
+				RemovePickup(weaponInfo.weapon)
 				table.remove(weapons, i)
 			end
 		end
