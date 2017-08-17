@@ -11,6 +11,7 @@ Citizen.CreateThread(function()
 		Citizen.Wait(0)
 		if bool then
 			TriggerServerEvent("Z:newplayer", PlayerId())
+			TriggerServerEvent("Z:newplayerID", GetPlayerServerId(PlayerId()))
 			bool = false
 		end
 	end

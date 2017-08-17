@@ -3,6 +3,7 @@ RegisterServerEvent('SavePlayerData')
 Citizen.CreateThread(function()
 		AddEventHandler('spawnPlayer', function(client)
 		print("Client Requested Spawn!")
+			if not GetPlayerIdentifier(client,0) then return end
 			MySQL.Async.fetchAll('SELECT * FROM players where steamid="'..GetPlayerIdentifier(client,0)..'"', {}, function(player) 
 				if player[1] then
 					if player[1].steamid == GetPlayerIdentifier(client,0) then

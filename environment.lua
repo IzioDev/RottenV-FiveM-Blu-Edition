@@ -6,7 +6,7 @@ local weather = "FOGGY"
 
 -- Allows you to set if time should be frozen and what time
 local freezeTime = false
-local hours = 11
+local hours = 1
 local minutes = 0
 
 -- Set if first person should be forced

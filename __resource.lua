@@ -24,15 +24,6 @@ client_scripts {
 		
 }
 
-local function object_entry(data)
-	dependency 'object-loader'
-
-	files(data)
-	object_file(data)
-end
-
-object_entry 'trees.xml'
-
 resource_type 'map' { gameTypes = { fivem = true } }
 
 map 'map.lua'

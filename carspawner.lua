@@ -550,7 +550,7 @@ Citizen.CreateThread(function()
 			
 			car = CreateVehicle(choosenCar, newVehicleX, NewVehicleY, NewVehicleZ, math.random(), true, true)
 			SetVehicleFuelLevel(car, math.random() + math.random(10, 80))
-			SetVehicleEngineHealth(car, math.random() + math.random(40, 99)*10)
+			SetVehicleEngineHealth(car, math.random(400,1000)+0.0)
 			PlaceObjectOnGroundProperly(car)
 			
 			table.insert(cars, car)
