@@ -119,6 +119,9 @@ Citizen.CreateThread(function()
 			if weaponInfo.weapon ~= 0 then
 				table.insert(weapons, weaponInfo)
 				Citizen.Trace(weaponInfo.weapon.." Spawned!")
+--				if not NetworkGetEntityIsNetworked(weaponInfo.weapon) then
+--					NetworkRegisterEntityAsNetworked(weaponInfo.weapon)
+--				end
 			else
 				RemovePickup(weaponInfo.weapon)
 				Citizen.Trace("Removed Faulty Pickup!")

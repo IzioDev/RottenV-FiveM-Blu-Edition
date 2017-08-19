@@ -39,7 +39,9 @@ consumableItems = {
 	"Cola",
 	"Milk",
 	"Chips",
-	"Beef"
+	"Beef",
+	
+	
 }
 consumableItems.count = {}
 
@@ -108,11 +110,11 @@ Citizen.CreateThread(function()
 				if consumableItems.count[cindex] > 0.0 and WarMenu.Button(Consumable, tostring(math.round(consumableItems.count[cindex]))) then
 					DecorSetFloat(GetPlayerPed(-1), "hunger", DecorGetFloat(GetPlayerPed(-1),"hunger")+consumableItems.replenish[cindex].hunger)
 					DecorSetFloat(GetPlayerPed(-1), "thirst", DecorGetFloat(GetPlayerPed(-1),"thirst")+consumableItems.replenish[cindex].thirst)
-					--			if GetEntityHealth(GetPlayerPed(-1)) + consumableItems.replenish[cindex].health >= 200.0 then
-					--				SetEntityHealth(GetPlayerPed(-1), 200.0)
-					--			elseif GetEntityHealth(GetPlayerPed(-1)) + consumableItems.replenish[cindex].health < 200.0 then
-					--				SetEntityHealth(GetPlayerPed(-1), GetEntityHealth(GetPlayerPed(-1))+ consumableItems.replenish[cindex].health)
-					--			end
+							--	if GetEntityHealth(GetPlayerPed(-1)) + consumableItems.replenish[cindex].health > 200.0 then
+							--		SetEntityHealth(GetPlayerPed(-1), 200.0)
+							--	elseif GetEntityHealth(GetPlayerPed(-1)) + consumableItems.replenish[cindex].health < 200.0 then
+							--		SetEntityHealth(GetPlayerPed(-1), GetEntityHealth(GetPlayerPed(-1))+ consumableItems.replenish[cindex].health)
+							--	end
 					consumableItems.count[cindex] = consumableItems.count[cindex]-1.0
 				end
 			end

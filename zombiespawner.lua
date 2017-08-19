@@ -420,6 +420,10 @@ Citizen.CreateThread(function()
 			--TaskCombatPed(ped, GetPlayerPed(-1), 0, 16)
 			x, y, z = table.unpack(GetEntityCoords(ped, true))
 			TaskWanderStandard(ped, 1.0, 10)
+	
+			if not NetworkGetEntityIsNetworked(ped) then
+				NetworkRegisterEntityAsNetworked(ped)
+			end
 			
 			
 			table.insert(peds, ped)

@@ -13,6 +13,14 @@ local minutes = 0
 local forceFirstPerson = false
 
 -- CODE --
+
+Citizen.CreateThread(function()
+	while true do
+		Citizen.Wait(0)
+		SetFlashLightFadeDistance(30.0)
+	end
+end)
+
 Citizen.CreateThread(function()
 	SetBlackout(true)
 	

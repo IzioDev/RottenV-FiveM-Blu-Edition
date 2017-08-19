@@ -47,8 +47,6 @@ local spawnableCars =
 	"Blazer3",
 	"Blazer4",
 	"Blazer5",
-	"Blimp",
-	"Blimp2",
 	"Blista",
 	"Blista2",
 	"Blista3",
@@ -248,7 +246,6 @@ local spawnableCars =
 	"Mesa",
 	"Mesa2",
 	"Mesa3",
-	"MetroTrain",
 	"Miljet",
 	"Minivan",
 	"Minivan2",
@@ -437,9 +434,6 @@ local spawnableCars =
 	"Tourbus",
 	"TowTruck",
 	"TowTruck2",
-	"TR2",
-	"TR3",
-	"TR4",
 	"Tractor",
 	"Tractor2",
 	"Tractor3",
@@ -552,7 +546,9 @@ Citizen.CreateThread(function()
 			SetVehicleFuelLevel(car, math.random() + math.random(10, 80))
 			SetVehicleEngineHealth(car, math.random(400,1000)+0.0)
 			PlaceObjectOnGroundProperly(car)
-			
+			if not NetworkGetEntityIsNetworked(car) then
+				NetworkRegisterEntityAsNetworked(car)
+			end
 			table.insert(cars, car)
 		end
 		

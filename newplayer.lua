@@ -22,7 +22,7 @@ local welcomed = false
 DecorRegister("hunger",1)
 DecorRegister("thirst",1)
 
-AddEventHandler("playerSpawned", function(spawn)
+AddEventHandler("playerSpawned", function(spawn,pid)
 	if spawnWithFlashlight then
 		GiveWeaponToPed(GetPlayerPed(-1), GetHashKey("WEAPON_FLASHLIGHT"), 1, false, false)
 		GiveWeaponToPed(GetPlayerPed(-1), GetHashKey("WEAPON_BAT"), 1, false, false)
@@ -41,7 +41,9 @@ AddEventHandler("playerSpawned", function(spawn)
 		NetworkSetFriendlyFireOption(true)
 		SetCanAttackFriendly(GetPlayerPed(-1), true, true)
 		Wait(1000)
-		initiateSave()
+		if pid == PlayerId() then
+			initiateSave()
+		end
 	end
 end)
 

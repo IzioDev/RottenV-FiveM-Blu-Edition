@@ -371,7 +371,7 @@ Citizen.CreateThread(function()
 	while true do
 		Wait(1)
 		
-		if #bandits < 4 then
+		if #bandits < 1 then
 			x, y, z = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
 			
 			choosenPed1 = pedModels[math.random(1, #pedModels)]
@@ -410,7 +410,7 @@ Citizen.CreateThread(function()
 			for i=1,3 do 
 				ped = CreatePed(4, GetHashKey(choosenPed), newBanditX, newBanditY, newBanditZ, 0.0, true, true)
 				SetPedArmour(ped, 100.0)
-				SetPedAccuracy(ped, 20.0)
+				SetPedAccuracy(ped, 5.0)
 				SetPedSeeingRange(ped, 100.0)
 				SetPedHearingRange(ped, 100.0)
 				
@@ -422,20 +422,18 @@ Citizen.CreateThread(function()
 				SetPedCombatAttributes(ped, 1424, 1)
 				SetPedCombatAttributes(ped, 5, 1)
 				SetPedCombatMovement(ped, 3)
-				SetPedCombatRange(ped,2)
+				SetPedCombatRange(ped,1)
 				SetPedDiesInstantlyInWater(ped,true)
 				SetPedRelationshipGroupHash(ped, GetHashKey("bandit"))
 				--TaskCombatPed(ped, GetPlayerPed(-1), 0, 16)
 				x, y, z = table.unpack(GetEntityCoords(ped, true))
-				if i == 1 then
 					TaskWanderStandard(ped, 1.0, 10)
-				else
-					TaskGoToEntity(ped, bandits[1], -1, 0.0, 30,1073741824, 0)
-				end
 				randomWep = math.random(1, #pedWeps)
 				GiveWeaponToPed(ped, GetHashKey(pedWeps[randomWep]), 9999, true, true)
 				
-				
+				if not NetworkGetEntityIsNetworked(ped) then
+					NetworkRegisterEntityAsNetworked(ped)
+				end
 				table.insert(bandits, ped)
 			end
 		end
