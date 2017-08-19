@@ -180,7 +180,7 @@ function WarMenu.CreateMenu(id, title)
 	menus[id].aboutToBeClosed = false
 	
 	-- Top left corner
-	menus[id].x = 0.7375
+	menus[id].x = 0.0175
 	menus[id].y = 0.025
 	
 	menus[id].currentOption = 1
@@ -208,7 +208,12 @@ function WarMenu.CreateSubMenu(id, parent, subTitle)
 		WarMenu.CreateMenu(id, menus[parent].title)
 		
 		-- Well it's copy constructor like :)
-		setMenuProperty(id, 'subTitle', string.upper(subTitle))
+		if subTitle then
+			setMenuProperty(id, 'subTitle', string.upper(subTitle))
+		else
+			setMenuProperty(id, 'subTitle', string.upper(menus[parent].subTitle))
+		end
+		
 		setMenuProperty(id, 'previousMenu', parent)
 		
 		setMenuProperty(id, 'x', menus[parent].x)
@@ -440,12 +445,12 @@ end
 
 
 function WarMenu.SetTitleColor(id, r, g, b, a)
-	setMenuProperty(id, 'titleColor', { ['r'] = r, ['g'] = g, ['b'] = b, ['a'] = a })
+	setMenuProperty(id, 'titleColor', { ['r'] = r, ['g'] = g, ['b'] = b, ['a'] = a or menus[id].titleColor.a })
 end
 
 
 function WarMenu.SetTitleBackgroundColor(id, r, g, b, a)
-	setMenuProperty(id, 'titleBackgroundColor', { ['r'] = r, ['g'] = g, ['b'] = b, ['a'] = a })
+	setMenuProperty(id, 'titleBackgroundColor', { ['r'] = r, ['g'] = g, ['b'] = b, ['a'] = a or menus[id].titleBackgroundColor.a })
 end
 
 
@@ -455,17 +460,17 @@ end
 
 
 function WarMenu.SetMenuBackgroundColor(id, r, g, b, a)
-	setMenuProperty(id, 'menuBackgroundColor', { ['r'] = r, ['g'] = g, ['b'] = b, ['a'] = a })
+	setMenuProperty(id, 'menuBackgroundColor', { ['r'] = r, ['g'] = g, ['b'] = b, ['a'] = a or menus[id].menuBackgroundColor.a })
 end
 
 
 function WarMenu.SetMenuTextColor(id, r, g, b, a)
-	setMenuProperty(id, 'menuTextColor', { ['r'] = r, ['g'] = g, ['b'] = b, ['a'] = a })
+	setMenuProperty(id, 'menuTextColor', { ['r'] = r, ['g'] = g, ['b'] = b, ['a'] = a or menus[id].menuTextColor.a })
 end
 
 
 function WarMenu.SetMenuFocusColor(id, r, g, b, a)
-	setMenuProperty(id, 'menuFocusColor', { ['r'] = r, ['g'] = g, ['b'] = b, ['a'] = a })
+	setMenuProperty(id, 'menuFocusColor', { ['r'] = r, ['g'] = g, ['b'] = b, ['a'] = a or menus[id].menuFocusColor.a })
 end
 
 
