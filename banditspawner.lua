@@ -410,7 +410,7 @@ Citizen.CreateThread(function()
 			for i=1,3 do 
 				ped = CreatePed(4, GetHashKey(choosenPed), newBanditX, newBanditY, newBanditZ, 0.0, true, true)
 				SetPedArmour(ped, 100.0)
-				SetPedAccuracy(ped, 35.0)
+				SetPedAccuracy(ped, 20.0)
 				SetPedSeeingRange(ped, 100.0)
 				SetPedHearingRange(ped, 100.0)
 				

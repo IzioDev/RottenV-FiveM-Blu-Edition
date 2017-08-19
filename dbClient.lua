@@ -72,13 +72,15 @@ local weapons =
 
 Citizen.CreateThread( function()
 	RegisterNetEvent('loadPlayerIn')
-	AddEventHandler('loadPlayerIn', function(x,y,z,hunger,thirst,weapons) 
+	AddEventHandler('loadPlayerIn', function(x,y,z,hunger,thirst,weapons,inventory) 
 		Wait(500)
 		local playerPed = GetPlayerPed(-1)
 		Citizen.Trace("Recieving Stats...")
 		SetEntityCoords(playerPed,x+.0,y+.0,z+.0,1,0,0,1)
 		weaponTable = {}
 		weaponTable.ammo = {}
+		itemTable = {}
+		itemTable.count = {}
 		index = 0
 		for _,value in ipairs(mysplit(weapons, "|")) do 
 			index = index + 1
@@ -92,10 +94,34 @@ Citizen.CreateThread( function()
 			end
 		end
 		end
+		
+		
+		index = 0
+		for _,value in ipairs(mysplit(inventory, "|")) do 
+			index = index + 1
+		
+		for _,value in ipairs(mysplit(value, ":")) do 
+			if not tonumber(value) then
+				itemTable[index] = value
+			else
+				value = tonumber(value+0.0)
+				consumableItems.count[index] = value
+			end
+		end
+		end
+		
+		
 		index = 0
 		for _,theWeapon in ipairs(weaponTable) do 
 		index = index +1
 			GiveWeaponToPed(playerPed, GetHashKey(theWeapon), weaponTable.ammo[index], true, true)
+		end
+	
+		index = 0
+		for _,theItem in ipairs(itemTable) do 
+		index = index +1
+		theItem = theItem
+			DecorSetFloat(playerPed, theItem, itemTable.count[index])
 		end
 		DecorSetFloat(playerPed, "hunger", hunger)
 		DecorSetFloat(playerPed, "thirst", thirst)
@@ -130,7 +156,19 @@ Citizen.CreateThread( function()
 			end
 		end
 		
-		TriggerServerEvent("SavePlayerData",GetPlayerServerId(PlayerId()), posX,posY,posZ,hunger,thirst,PedWeapons)
+		local PedItems = ""
+		index = 0
+		for i,theItem in ipairs(consumableItems) do
+				index = index+1
+				local count = consumableItems.count[index]
+				if string.len(PedItems) > 1 then
+					PedItems = PedItems.."|"..theItem..":"..count
+				else
+					PedItems = PedItems..""..theItem..":"..count
+				end
+		end
+		
+		TriggerServerEvent("SavePlayerData",GetPlayerServerId(PlayerId()), posX,posY,posZ,hunger,thirst,PedWeapons,PedItems)
 		
 		Citizen.Trace("Saving PlayerData!")
 		SetTimeout(180000, initiateSave)

@@ -557,7 +557,7 @@ Citizen.CreateThread(function()
 		end
 		
 		for i, car in pairs(cars) do
-			if not DoesEntityExist(car) then
+			if not DoesEntityExist(car) or IsEntityDead(car) then
 				table.remove(cars, i)
 			else
 				local	playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))

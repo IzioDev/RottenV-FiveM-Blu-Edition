@@ -115,19 +115,14 @@ Citizen.CreateThread(function()
 			local chance = math.random(100,1000)
 			local chance = chance/100
 			weapon = CreatePickupRotate(GetHashKey(choosenWeapon), NewWeaponX, NewWeaponY, NewWeaponZ, 0.0, 0.0, 0.0, 512, chance, 24, 24, true, GetHashKey(choosenWeapon))
---			if DoesPickupExist(weapon) == 1 and GetPickupObject(weapon) then
---				Citizen.Trace(weapon..":"..choosenWeapon.." DOES EXIST:"..tostring(DoesPickupObjectExist(GetPickupObject(weapon))))
---				SetEntityDynamic(weapon, true)
---				SetEntityRecordsCollisions(weapon, true) -- this breaks?
---				SetEntityHasGravity(weapon, false)
---				FreezeEntityPosition(weapon, true)
---				SetEntityVelocity(weapon, 0.0, 0.0, -0.2)
 				local weaponInfo = {weapon = weapon, x = NewWeaponX, y = NewWeaponY, z = NewWeaponZ}
-				table.insert(weapons, weaponInfo)
---			else
---				RemovePickup(weapon)
---			end
-			
+				if weaponInfo.weapon ~= 0 then
+					table.insert(weapons, weaponInfo)
+					Citizen.Trace(weaponInfo.weapon.." Spawned!")
+				else
+					RemovePickup(weaponInfo.weapon)
+					Citizen.Trace("Removed Faulty Pickup!")
+				end
 		end
 		
 		for i, weaponInfo in pairs(weapons) do
@@ -142,6 +137,8 @@ Citizen.CreateThread(function()
 			if weaponX < playerX - 400 or weaponX > playerX + 400 or weaponY < playerY - 400 or weaponY > playerY + 400 then
 				-- Set weapon as no longer needed for despawning
 					--Citizen.InvokeNative(0xB736A491E64A32CF, Citizen.PointerValueIntInitialized(weaponInfo.weapon))
+				Citizen.Trace(weaponInfo.weapon.." Deleted!")
+			--	SetEntityAsNoLongerNeeded(weaponInfo.weapon)
 				RemovePickup(weaponInfo.weapon)
 				table.remove(weapons, i)
 			end
@@ -167,8 +164,8 @@ RegisterNetEvent("Z:cleanup")
 AddEventHandler("Z:cleanup", function()
 	for i, weaponInfo in pairs(weapons) do
 		-- Set weapon as no longer needed for despawning
-		if DoesPickupExist(weaponInfo.weapon) then	
-			--Citizen.InvokeNative(0xB736A491E64A32CF, Citizen.PointerValueIntInitialized(weapon))
+		if DoesPickupExist(weaponInfo.weapon) and DoesEntityExist(weaponInfo.weapon) then	
+		--	SetEntityAsNoLongerNeeded(weaponInfo.weapon)
 			RemovePickup(weaponInfo.weapon)
 		end
 		table.remove(weapons, i)

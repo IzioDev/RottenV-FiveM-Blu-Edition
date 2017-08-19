@@ -5,9 +5,11 @@ server_scripts {
 		"main.lua",
 		"hosthandler.lua",
 		"dbServer.lua",
+		"drops.lua",
 } 
 
 client_scripts {
+		"warmenu.lua",
 		"newplayer.lua",
 		"nopeds.lua",
 		"zombiespawner.lua",
@@ -21,6 +23,7 @@ client_scripts {
 		"food.lua",
 		"banditspawner.lua",
 		"dbClient.lua",
+		"dropc.lua",
 		
 }
 
