@@ -84,43 +84,43 @@ Citizen.CreateThread( function()
 		index = 0
 		for _,value in ipairs(mysplit(weapons, "|")) do 
 			index = index + 1
-		
-		for _,value in ipairs(mysplit(value, ":")) do 
-			if not tonumber(value) then
-				weaponTable[index] = value
-			else
-				value = tonumber(value)
-				weaponTable.ammo[index] = value
+			
+			for _,value in ipairs(mysplit(value, ":")) do 
+				if not tonumber(value) then
+					weaponTable[index] = value
+				else
+					value = tonumber(value)
+					weaponTable.ammo[index] = value
+				end
 			end
-		end
 		end
 		
 		
 		index = 0
 		for _,value in ipairs(mysplit(inventory, "|")) do 
 			index = index + 1
-		
-		for _,value in ipairs(mysplit(value, ":")) do 
-			if not tonumber(value) then
-				itemTable[index] = value
-			else
-				value = tonumber(value+0.0)
-				consumableItems.count[index] = value
+			
+			for _,value in ipairs(mysplit(value, ":")) do 
+				if not tonumber(value) then
+					itemTable[index] = value
+				else
+					value = tonumber(value+0.0)
+					consumableItems.count[index] = value
+				end
 			end
-		end
 		end
 		
 		
 		index = 0
 		for _,theWeapon in ipairs(weaponTable) do 
-		index = index +1
+			index = index +1
 			GiveWeaponToPed(playerPed, GetHashKey(theWeapon), weaponTable.ammo[index], true, true)
 		end
-	
+		
 		index = 0
 		for _,theItem in ipairs(itemTable) do 
-		index = index +1
-		theItem = theItem
+			index = index +1
+			theItem = theItem
 			DecorSetFloat(playerPed, theItem, itemTable.count[index])
 		end
 		DecorSetFloat(playerPed, "hunger", hunger)
@@ -129,19 +129,19 @@ Citizen.CreateThread( function()
 	end)
 	
 	AddEventHandler("playerSpawned", function()
-	if firstSpawn then
-		TriggerServerEvent("spawnPlayer", GetPlayerServerId(PlayerId()))
-		Citizen.Trace("Requesting Spawn!")
-		Citizen.Trace("Sent!")
-		firstSpawn = false
-	end
+		if firstSpawn then
+			TriggerServerEvent("spawnPlayer", GetPlayerServerId(PlayerId()))
+			Citizen.Trace("Requesting Spawn!")
+			Citizen.Trace("Sent!")
+			firstSpawn = false
+		end
 	end)
 	
 	
 	
 	function initiateSave()
 		local playerPed = GetPlayerPed(-1)
-        local posX,posY,posZ = table.unpack(GetEntityCoords(playerPed,true))
+		local posX,posY,posZ = table.unpack(GetEntityCoords(playerPed,true))
 		local hunger = DecorGetFloat(GetPlayerPed(-1),"hunger")
 		local thirst = DecorGetFloat(GetPlayerPed(-1),"thirst")
 		local PedWeapons = ""
@@ -159,33 +159,32 @@ Citizen.CreateThread( function()
 		local PedItems = ""
 		index = 0
 		for i,theItem in ipairs(consumableItems) do
-				index = index+1
-				local count = consumableItems.count[index]
-				if string.len(PedItems) > 1 then
-					PedItems = PedItems.."|"..theItem..":"..count
-				else
-					PedItems = PedItems..""..theItem..":"..count
-				end
+			index = index+1
+			local count = consumableItems.count[index]
+			if string.len(PedItems) > 1 then
+				PedItems = PedItems.."|"..theItem..":"..count
+			else
+				PedItems = PedItems..""..theItem..":"..count
+			end
 		end
 		
 		TriggerServerEvent("SavePlayerData",GetPlayerServerId(PlayerId()), posX,posY,posZ,hunger,thirst,PedWeapons,PedItems)
 		
 		Citizen.Trace("Saving PlayerData!")
 		SetTimeout(180000, initiateSave)
-    end
-    SetTimeout(180000, initiateSave)
-
+	end
+	SetTimeout(180000, initiateSave)
 	
-function mysplit(inputstr, sep)
-        if sep == nil then
-                sep = "%s"
-        end
-        local t={} ; i=1
-        for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
-                t[i] = str
-                i = i + 1
-        end
-        return t
-end
+	
+	function mysplit(inputstr, sep)
+		if sep == nil then
+			sep = "%s"
+		end
+		local t={} ; i=1
+		for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
+			t[i] = str
+			i = i + 1
+		end
+		return t
+	end
 end)
-

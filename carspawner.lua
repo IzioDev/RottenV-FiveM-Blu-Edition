@@ -521,14 +521,14 @@ Citizen.CreateThread(function()
 				Wait(1)
 				
 				repeat
-				Wait(1)
+					Wait(1)
 					newVehicleX = x + math.random(-1000, 1000)
 					NewVehicleY = y + math.random(-1000, 1000)
 					_,NewVehicleZ = GetGroundZFor_3dCoord(newVehicleX+.0,NewVehicleY+.0,z+999.0, 1)
 				until NewVehicleZ ~= 0
 				canSpawn = true
 				
---[[
+				--[[
 				for _, player in pairs(players) do
 					Wait(1)
 					playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(player), true))
@@ -541,7 +541,7 @@ Citizen.CreateThread(function()
 				end
 				--]]
 			until canSpawn
-
+			
 			choosenCar = spawnableCars[math.random(1, #spawnableCars)]
 			RequestModel(choosenCar)
 			while not HasModelLoaded(choosenCar) or not HasCollisionForModelLoaded(choosenCar) do
@@ -580,7 +580,7 @@ Citizen.CreateThread(function()
 		for i, car in pairs(cars) do
 			playerX, playerY, playerZ = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
 			carX, carY, carZ = table.unpack(GetEntityCoords(car, false))
-		--	DrawLine(playerX,playerY, playerZ, carX, carY, carZ, 255.0,0.0,0.0,255.0)
+			--	DrawLine(playerX,playerY, playerZ, carX, carY, carZ, 255.0,0.0,0.0,255.0)
 		end
 	end
 end)

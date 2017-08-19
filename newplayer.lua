@@ -38,7 +38,7 @@ AddEventHandler("playerSpawned", function(spawn)
 			DecorSetFloat(GetPlayerPed(-1), Consumable, 99.0)
 		end
 		SetPedDropsWeaponsWhenDead(GetPlayerPed(-1),true)
-	    NetworkSetFriendlyFireOption(true)
+		NetworkSetFriendlyFireOption(true)
 		SetCanAttackFriendly(GetPlayerPed(-1), true, true)
 		Wait(1000)
 		initiateSave()

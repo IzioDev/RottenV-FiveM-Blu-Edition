@@ -115,14 +115,14 @@ Citizen.CreateThread(function()
 			local chance = math.random(100,1000)
 			local chance = chance/100
 			weapon = CreatePickupRotate(GetHashKey(choosenWeapon), NewWeaponX, NewWeaponY, NewWeaponZ, 0.0, 0.0, 0.0, 512, chance, 24, 24, true, GetHashKey(choosenWeapon))
-				local weaponInfo = {weapon = weapon, x = NewWeaponX, y = NewWeaponY, z = NewWeaponZ}
-				if weaponInfo.weapon ~= 0 then
-					table.insert(weapons, weaponInfo)
-					Citizen.Trace(weaponInfo.weapon.." Spawned!")
-				else
-					RemovePickup(weaponInfo.weapon)
-					Citizen.Trace("Removed Faulty Pickup!")
-				end
+			local weaponInfo = {weapon = weapon, x = NewWeaponX, y = NewWeaponY, z = NewWeaponZ}
+			if weaponInfo.weapon ~= 0 then
+				table.insert(weapons, weaponInfo)
+				Citizen.Trace(weaponInfo.weapon.." Spawned!")
+			else
+				RemovePickup(weaponInfo.weapon)
+				Citizen.Trace("Removed Faulty Pickup!")
+			end
 		end
 		
 		for i, weaponInfo in pairs(weapons) do
@@ -133,12 +133,12 @@ Citizen.CreateThread(function()
 			local	playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
 			local 	weaponX = weaponInfo.x
 			local 	weaponY = weaponInfo.y
-				
+			
 			if weaponX < playerX - 400 or weaponX > playerX + 400 or weaponY < playerY - 400 or weaponY > playerY + 400 then
 				-- Set weapon as no longer needed for despawning
-					--Citizen.InvokeNative(0xB736A491E64A32CF, Citizen.PointerValueIntInitialized(weaponInfo.weapon))
+				--Citizen.InvokeNative(0xB736A491E64A32CF, Citizen.PointerValueIntInitialized(weaponInfo.weapon))
 				Citizen.Trace(weaponInfo.weapon.." Deleted!")
-			--	SetEntityAsNoLongerNeeded(weaponInfo.weapon)
+				--	SetEntityAsNoLongerNeeded(weaponInfo.weapon)
 				RemovePickup(weaponInfo.weapon)
 				table.remove(weapons, i)
 			end
@@ -153,7 +153,7 @@ Citizen.CreateThread(function()
 		for i, weaponInfo in pairs(weapons) do
 			local weaponX,weaponY,weaponZ = table.unpack(GetPickupCoords(weaponInfo.weapon))
 			playerX, playerY, playerZ = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
-	--		DrawLine(playerX,playerY, playerZ, weaponInfo.x, weaponInfo.y, weaponInfo.z, 0.0,255.0,0.0,255)
+			--		DrawLine(playerX,playerY, playerZ, weaponInfo.x, weaponInfo.y, weaponInfo.z, 0.0,255.0,0.0,255)
 			DrawLightWithRange(weaponX,weaponY,weaponZ+0.1, 1.0, 1.0, 1.0, 1.7, 0.001)
 		end
 	end
@@ -165,7 +165,7 @@ AddEventHandler("Z:cleanup", function()
 	for i, weaponInfo in pairs(weapons) do
 		-- Set weapon as no longer needed for despawning
 		if DoesPickupExist(weaponInfo.weapon) and DoesEntityExist(weaponInfo.weapon) then	
-		--	SetEntityAsNoLongerNeeded(weaponInfo.weapon)
+			--	SetEntityAsNoLongerNeeded(weaponInfo.weapon)
 			RemovePickup(weaponInfo.weapon)
 		end
 		table.remove(weapons, i)

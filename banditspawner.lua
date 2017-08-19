@@ -401,10 +401,10 @@ Citizen.CreateThread(function()
 				Wait(1)
 			end
 			
-				
-				newBanditX = x + math.random(-2000, 2000)
-				newBanditY = y + math.random(-2000, 2000)
-				_,newBanditZ = GetGroundZFor_3dCoord(newBanditX+.0,newBanditY+.0,z+999.0, 1)
+			
+			newBanditX = x + math.random(-2000, 2000)
+			newBanditY = y + math.random(-2000, 2000)
+			_,newBanditZ = GetGroundZFor_3dCoord(newBanditX+.0,newBanditY+.0,z+999.0, 1)
 			
 			
 			for i=1,3 do 
