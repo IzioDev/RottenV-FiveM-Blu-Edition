@@ -180,7 +180,7 @@ function WarMenu.CreateMenu(id, title)
 	menus[id].aboutToBeClosed = false
 	
 	-- Top left corner
-	menus[id].x = 0.0175
+	menus[id].x = 0.7375
 	menus[id].y = 0.025
 	
 	menus[id].currentOption = 1
