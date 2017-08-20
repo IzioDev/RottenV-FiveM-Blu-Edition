@@ -1,8 +1,8 @@
 Citizen.CreateThread(function()
-	defaultHungerLoss = 0.0001
-	defaultThirstLoss = 0.0003
-	SprintingHungerLoss = 0.0003
-	SprintingThirstLoss = 0.0005
+	defaultHungerLoss = 0.0003
+	defaultThirstLoss = 0.0005
+	SprintingHungerLoss = 0.0005
+	SprintingThirstLoss = 0.0007
 	Saturation = 0
 	while true do
 		Citizen.Wait(0)
@@ -38,33 +38,30 @@ consumableItems = {
 	"Apple",
 	"Cola",
 	"Milk",
-	"Chips",
+	"Chips Package",
 	"Beef",
-	
-	
+	"Beefium",
+	"Bandage",
+	"Orange Juice",
 }
 consumableItems.count = {}
+for i,Consumable in ipairs(consumableItems) do		
+	consumableItems.count[i] = 0.0
+	Citizen.Trace(consumableItems.count[i])
+end
 
 consumableItems.replenish = {
-	{hunger = 15.0,thirst = 3.0,health = 20.0},
-	{hunger = 3.0,thirst = 30.0,health = 10.0},
-	{hunger = 10.0,thirst = 40.0,health = 15.0},
-	{hunger = 15.0,thirst = -10.0,health = 4.0},
-	{hunger = 60.0,thirst = -25.0,health = 6.0}
+	{hunger = 15.0,thirst = 3.0,health = 20.0,"The healthy snack for Everyone!"},
+	{hunger = 3.0,thirst = 30.0,health = 10.0,"Famous Cocaine Drink"},
+	{hunger = 10.0,thirst = 40.0,health = 15.0,"Tastes like Milkyway!"},
+	{hunger = 15.0,thirst = -10.0,health = 4.0,"Quick to eat, makes you thristy tho."},
+	{hunger = 40.0,thirst = -25.0,health = 6.0,"Yummie"},
+	{hunger = 60.0,thirst = -10.0,health = 6.0,"Upgraded Version of Beef!"},
+	{hunger = 0.0,thirst = 0.0,health = 20.0,"Not to use for broken hearts."},
+	{hunger = 3.0,thirst = 10.0,health = 5.0,"Tasty AND Healthy!"},
+	
 }
 
-
-Tableindex = 0
-for i,Consumable in ipairs(consumableItems) do		
-	Tableindex = Tableindex+1
-	consumableItems.count[Tableindex] = 0.0
-end
-
-Tableindex = 0
-for _,theItem in ipairs(consumableItems) do 
-	Tableindex = Tableindex +1
-	DecorRegister(playerPed, theItem, 1)
-end
 
 Citizen.CreateThread(function()
 	local currentItemIndex = 1
@@ -75,12 +72,6 @@ Citizen.CreateThread(function()
 	WarMenu.CreateSubMenu('kys', 'Interaction', "R.I.P.")
 	
 	while true do
-		
-		
-		
-		
-		
-		
 		if WarMenu.IsMenuOpened('Interaction') then
 			-- add stuff here if activated
 			

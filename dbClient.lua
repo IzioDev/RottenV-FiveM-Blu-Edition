@@ -104,7 +104,7 @@ Citizen.CreateThread( function()
 				if not tonumber(value) then
 					itemTable[index] = value
 				else
-					value = tonumber(value+0.0)
+					value = tonumber(value+.0)
 					consumableItems.count[index] = value
 				end
 			end
@@ -117,12 +117,6 @@ Citizen.CreateThread( function()
 			GiveWeaponToPed(playerPed, GetHashKey(theWeapon), weaponTable.ammo[index], true, true)
 		end
 		
-		index = 0
-		for _,theItem in ipairs(itemTable) do 
-			index = index +1
-			theItem = theItem
-			DecorSetFloat(playerPed, theItem, itemTable.count[index])
-		end
 		DecorSetFloat(playerPed, "hunger", hunger)
 		DecorSetFloat(playerPed, "thirst", thirst)
 		Citizen.Trace("Done!")
@@ -136,6 +130,9 @@ Citizen.CreateThread( function()
 			firstSpawn = false
 		end
 	end)
+	
+	
+	
 	
 	
 	
@@ -160,7 +157,9 @@ Citizen.CreateThread( function()
 		index = 0
 		for i,theItem in ipairs(consumableItems) do
 			index = index+1
-			local count = consumableItems.count[index]
+			count = consumableItems.count[index]
+			
+			
 			if string.len(PedItems) > 1 then
 				PedItems = PedItems.."|"..theItem..":"..count
 			else

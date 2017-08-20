@@ -24,6 +24,7 @@ client_scripts {
 	"banditspawner.lua",
 	"dbClient.lua",
 	"dropc.lua",
+	"foodspawner.lua"
 	
 }
 

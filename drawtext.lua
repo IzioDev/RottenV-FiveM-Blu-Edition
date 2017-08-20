@@ -11,7 +11,7 @@ Citizen.CreateThread(function()
 		SetTextDropShadow()
 		SetTextOutline()
 		SetTextEntry("STRING")
-		AddTextComponentString("RottenV Alpha v3.0 Blü edition")
+		AddTextComponentString("RottenV:R Alpha v1.15R: https://discord.gg/jxHaDea")
 		DrawText(0.005, 0.005)
 		
 		health = GetEntityHealth(GetPlayerPed(-1))

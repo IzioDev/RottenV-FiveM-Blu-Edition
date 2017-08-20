@@ -16,6 +16,7 @@ Citizen.CreateThread(function()
 	end)
 	
 	AddEventHandler("SavePlayerData", function(client,posX,posY,posZ,hunger,thirst,weapons,inv)
-		MySQL.Async.execute('UPDATE players SET x="'..posX..'", y="'..posY..'", z="'..posZ..'", hunger="'..hunger..'", thirst="'..thirst..'", weapons="'..weapons..'" WHERE steamid="'..GetPlayerIdentifier(client,0)..'"', {}, function() end)
+		MySQL.Async.execute('UPDATE players SET x="'..posX..'", y="'..posY..'", z="'..posZ..'", hunger="'..hunger..'", thirst="'..thirst..'", weapons="'..weapons..'", inv="'..inv..'" WHERE steamid="'..GetPlayerIdentifier(client,0)..'"', {}, function() end)
 	end)
 end)
+
