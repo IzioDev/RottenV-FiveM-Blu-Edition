@@ -8,7 +8,6 @@ AddEventHandler("Z:newplayer", function(id)
 	
 	if not host then
 		host = source
-		TriggerClientEvent("Z:timesynchost", source, time)
 	end
 end)
 
@@ -19,7 +18,6 @@ AddEventHandler("playerDropped", function(reason)
 		if #players > 0 then
 			for mSource, _ in pairs(players) do
 				host = mSource
-				TriggerClientEvent("Z:timesynchost", host, time)
 				break
 			end
 		else
@@ -28,8 +26,17 @@ AddEventHandler("playerDropped", function(reason)
 	end
 end)
 
-RegisterServerEvent("Z:timesync")
-AddEventHandler("Z:timesync", function(newTime)
-	time = newTime
-	TriggerClientEvent("Z:timesync", -1, time)
+time = {hour = 8, minute = 0, second = 0} -- start time
+date = {day = 1, month = 1, year = 2017} -- start date
+
+RegisterServerEvent("tads:newplayer")
+AddEventHandler("tads:newplayer", function()
+	print("Syncing time and date for: "..GetPlayerName(source))
+    TriggerClientEvent("tads:timeanddatesync", source, time, date)
+end)
+
+RegisterServerEvent("tads:timeanddatesync")
+AddEventHandler("tads:timeanddatesync", function(newTime, newDate)
+    time = newTime
+    date = newDate
 end)
