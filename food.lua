@@ -3,6 +3,8 @@ Citizen.CreateThread(function()
 	defaultThirstLoss = 0.0005
 	SprintingHungerLoss = 0.0005
 	SprintingThirstLoss = 0.0007
+	drivingHungerLoss = 0.0002
+	drivingThirstLoss = 0.0003
 	Saturation = 0
 	while true do
 		Citizen.Wait(0)
@@ -15,6 +17,9 @@ Citizen.CreateThread(function()
 		if IsPedSprinting(GetPlayerPed(-1)) then
 			DecorSetFloat(GetPlayerPed(-1), "hunger", DecorGetFloat(GetPlayerPed(-1),"hunger")-SprintingHungerLoss)
 			DecorSetFloat(GetPlayerPed(-1), "thirst", DecorGetFloat(GetPlayerPed(-1),"thirst")-SprintingThirstLoss)
+		elseif IsPedInVehicle(GetPlayerPed(-1) then
+			DecorSetFloat(GetPlayerPed(-1), "hunger", DecorGetFloat(GetPlayerPed(-1),"hunger")-drivingHungerLoss)
+			DecorSetFloat(GetPlayerPed(-1), "thirst", DecorGetFloat(GetPlayerPed(-1),"thirst")-drivingThirstLoss)
 		else
 			DecorSetFloat(GetPlayerPed(-1), "hunger", DecorGetFloat(GetPlayerPed(-1),"hunger")-defaultHungerLoss)
 			DecorSetFloat(GetPlayerPed(-1), "thirst", DecorGetFloat(GetPlayerPed(-1),"thirst")-defaultThirstLoss)
@@ -45,6 +50,8 @@ consumableItems = {
 	"Orange Juice Pack",
 	"Pizza",
 	"Fried Chicken",
+	"Small Medkit",
+	"Water Bottle",
 }
 consumableItems.count = {}
 for i,Consumable in ipairs(consumableItems) do		
@@ -62,6 +69,8 @@ consumableItems.replenish = {
 	{hunger = 3.0,thirst = 10.0,health = 5,"Tasty AND Healthy!"},
 	{hunger = 50.0,thirst = 30.0,health = 5,"Fat.. but so delicious."},
 	{hunger = 15.0,thirst = -15.0,health = 5,"Deep Fried is best fried."},
+	{hunger = 0.0,thirst = 0.0,health = 50,"Mandatory in every Motorised Vehicle by Law, also useful if you are about to die."},
+	{hunger = 0.0,thirst = 50.0,health = 5,"Fresh, clean water, delicious."},
 }
 
 
