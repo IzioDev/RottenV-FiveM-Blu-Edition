@@ -1,4 +1,7 @@
 Citizen.CreateThread(function()
+	greenr,greeng,greenb = 0,255,0
+	yellowr,yellowg,yellowb = 255,191,0
+	redr,redg,redb = 255,0,0
 	while true do
 		Wait(1)
 		
@@ -19,7 +22,11 @@ Citizen.CreateThread(function()
 			SetTextFont(0)
 			SetTextProportional(1)
 			SetTextScale(0.0, 0.55)
+			if health < 130 then 
+			SetTextColour(redr,redg,redb, 255)
+			else
 			SetTextColour(0, 255, 0, 255)
+			end
 			SetTextDropshadow(0, 0, 0, 0, 255)
 			SetTextEdge(1, 0, 0, 0, 255)
 			SetTextDropShadow()
@@ -33,7 +40,13 @@ Citizen.CreateThread(function()
 			SetTextFont(0)
 			SetTextProportional(1)
 			SetTextScale(0.0, 0.55)
+			if hunger < 40.0 and hunger > 20.0 then
+			SetTextColour(yellowr,yellowg,yellowb, 255)
+			elseif hunger < 20.0 then
+			SetTextColour(redr,redg,redb, 255)
+			else
 			SetTextColour(0, 255, 0, 255)
+			end
 			SetTextDropshadow(0, 0, 0, 0, 255)
 			SetTextEdge(1, 0, 0, 0, 255)
 			SetTextDropShadow()
@@ -47,7 +60,13 @@ Citizen.CreateThread(function()
 			SetTextFont(0)
 			SetTextProportional(1)
 			SetTextScale(0.0, 0.55)
+			if thirst < 40.0 and thirst > 20.0 then
+			SetTextColour(yellowr,yellowg,yellowb, 255)
+			elseif thirst < 20.0 then
+			SetTextColour(redr,redg,redb, 255)
+			else
 			SetTextColour(0, 255, 0, 255)
+			end
 			SetTextDropshadow(0, 0, 0, 0, 255)
 			SetTextEdge(1, 0, 0, 0, 255)
 			SetTextDropShadow()
