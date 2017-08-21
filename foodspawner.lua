@@ -68,13 +68,14 @@ Citizen.CreateThread(function()
 		end
 		
 		for i, itemInfo in pairs(spawnedItems) do
-			if not DoesPickupExist(itemInfo.pickup) or HasPickupBeenCollected(itemInfo.pickup) then
+			if not DoesPickupExist(itemInfo.pickup) or HasPickupBeenCollected(itemInfo.pickup) and DistanceBetweenCoords(itemInfo.pickup,GetPlayerPed(-1)) < 10.0 then
+				
 				Citizen.Trace("pickup: "..itemInfo.pickup.." with "..itemInfo.pickupItem.." count "..itemInfo.pickupItemCount)
 				consumableItems.count[itemInfo.pickupItem] = consumableItems.count[itemInfo.pickupItem]+itemInfo.pickupItemCount
 				if itemInfo.pickupItemCount > 1 then
 					TriggerEvent('showNotification', "You Found: ~g~"..math.round(itemInfo.pickupItemCount).." "..consumableItems[itemInfo.pickupItem].."s" )
 				else
-					TriggerEvent('showNotification', "You Found: ~g~"..math.round(itemInfo.pickupItemCount).." "..consumableItems[itemInfo.pickupItem].."(s)" )
+					TriggerEvent('showNotification', "You Found: ~g~"..math.round(itemInfo.pickupItemCount).." "..consumableItems[itemInfo.pickupItem] )
 				end
 				table.remove(spawnedItems, i)
 				break

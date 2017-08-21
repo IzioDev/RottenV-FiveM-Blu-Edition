@@ -50,9 +50,10 @@ AddEventHandler("playerSpawned", function(spawn,pid)
 		SetPedDropsWeaponsWhenDead(GetPlayerPed(-1),true)
 		NetworkSetFriendlyFireOption(true)
 		SetCanAttackFriendly(GetPlayerPed(-1), true, true)
+		TriggerEvent('showNotification', "Press 'M' to open your Interaction Menu!")
 		Wait(5000)
 		if pid == PlayerId() then
-			initiateSave()
+			initiateSave(true)
 		end
 	end
 end)

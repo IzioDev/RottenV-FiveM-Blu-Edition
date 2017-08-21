@@ -38,11 +38,13 @@ consumableItems = {
 	"Apple",
 	"Cola",
 	"Milk",
-	"Chips Package",
+	"Chips Pack",
 	"Beef",
 	"Beefium",
 	"Bandage",
-	"Orange Juice",
+	"Orange Juice Pack",
+	"Pizza",
+	"Fried Chicken",
 }
 consumableItems.count = {}
 for i,Consumable in ipairs(consumableItems) do		
@@ -52,13 +54,15 @@ end
 
 consumableItems.replenish = {
 	{hunger = 15.0,thirst = 3.0,health = 20.0,"The healthy snack for Everyone!"},
-	{hunger = 3.0,thirst = 30.0,health = 10.0,"Famous Cocaine Drink"},
-	{hunger = 10.0,thirst = 40.0,health = 15.0,"Tastes like Milkyway!"},
-	{hunger = 15.0,thirst = -10.0,health = 4.0,"Quick to eat, makes you thristy tho."},
+	{hunger = 3.0,thirst = 30.0,health = 10.0,"Famous Cocaine-Containing Drink"},
+	{hunger = 10.0,thirst = 40.0,health = 15.0,"Galactic."},
+	{hunger = 15.0,thirst = -10.0,health = 4.0,"Quick to eat, doesn't taste like much, fills the stomach tho."},
 	{hunger = 40.0,thirst = -25.0,health = 6.0,"Yummie"},
-	{hunger = 60.0,thirst = -10.0,health = 6.0,"Upgraded Version of Beef!"},
-	{hunger = 0.0,thirst = 0.0,health = 20.0,"Not to use for broken hearts."},
+	{hunger = 60.0,thirst = -10.0,health = 6.0,"Due to extensive research scientists have discovered a new form of beef called Beefium, better than ever, and tastier too!"},
+	{hunger = 0.0,thirst = 0.0,health = 20.0,"Please do not apply on broken hearts."},
 	{hunger = 3.0,thirst = 10.0,health = 5.0,"Tasty AND Healthy!"},
+	{hunger = 50.0,thirst = 30.0,health = 10.0,"Fat.. but so delicious."},
+	{hunger = 15.0,thirst = -15.0,health = 10.0,"Deep Fried is best fried."},
 	
 }
 

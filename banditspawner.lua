@@ -1,27 +1,19 @@
 local pedWeps =
 {
 	"WEAPON_PISTOL",
-	"WEAPON_MG",
 	"WEAPON_PUMPSHOTGUN",
-	"WEAPON_SNIPERRIFLE",
 	"WEAPON_SAWNOFFSHOTGUN",
 	"WEAPON_MICROSMG",
 	"WEAPON_COMPACTRIFLE",
 	"WEAPON_COMBATPISTOL",
-	"WEAPON_MUSKET",
 	"WEAPON_BULLPUPRIFLE",
 	"WEAPON_ASSAULTSHOTGUN",
-	"WEAPON_APPISTOL",
 	"WEAPON_REVOLVER",
 	"WEAPON_COMBATPDW",
-	"WEAPON_ADVANCEDRIFLE",
 	"WEAPON_ASSAULTSMG",
 	"WEAPON_ASSAULTRIFLE",
 	"weapon_Pistol_Mk2",
 	"weapon_AssaultRifle_Mk2",
-	"weapon_CarbineRifle_Mk2",
-	"weapon_CombatMG_Mk2",
-	"weapon_HeavySniper_Mk2",
 	"weapon_SMG_Mk2"
 }
 
@@ -371,7 +363,7 @@ Citizen.CreateThread(function()
 	while true do
 		Wait(1)
 		
-		if #bandits < 1 then
+		if not #bandits == 1 then
 			x, y, z = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
 			
 			choosenPed1 = pedModels[math.random(1, #pedModels)]
@@ -406,11 +398,9 @@ Citizen.CreateThread(function()
 			newBanditY = y + math.random(-2000, 2000)
 			_,newBanditZ = GetGroundZFor_3dCoord(newBanditX+.0,newBanditY+.0,z+999.0, 1)
 			
-			
-			for i=1,3 do 
 				ped = CreatePed(4, GetHashKey(choosenPed), newBanditX, newBanditY, newBanditZ, 0.0, true, true)
 				SetPedArmour(ped, 100.0)
-				SetPedAccuracy(ped, 5.0)
+				SetPedAccuracy(ped, 0.5)
 				SetPedSeeingRange(ped, 100.0)
 				SetPedHearingRange(ped, 100.0)
 				
@@ -435,7 +425,6 @@ Citizen.CreateThread(function()
 					NetworkRegisterEntityAsNetworked(ped)
 				end
 				table.insert(bandits, ped)
-			end
 		end
 		
 		for i, ped in pairs(bandits) do
@@ -460,6 +449,8 @@ Citizen.CreateThread(function()
 		end
 	end
 end)
+
+
 
 
 --[[ debug stuff

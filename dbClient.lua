@@ -136,7 +136,7 @@ Citizen.CreateThread( function()
 	
 	
 	
-	function initiateSave()
+	function initiateSave(ignoreTimer)
 		local playerPed = GetPlayerPed(-1)
 		local posX,posY,posZ = table.unpack(GetEntityCoords(playerPed,true))
 		local hunger = DecorGetFloat(GetPlayerPed(-1),"hunger")
@@ -170,7 +170,9 @@ Citizen.CreateThread( function()
 		TriggerServerEvent("SavePlayerData",GetPlayerServerId(PlayerId()), posX,posY,posZ,hunger,thirst,PedWeapons,PedItems)
 		
 		Citizen.Trace("Saving PlayerData!")
-		SetTimeout(180000, initiateSave)
+		if ignoreTimer then
+			SetTimeout(180000, initiateSave)
+		end
 	end
 	SetTimeout(180000, initiateSave)
 	
