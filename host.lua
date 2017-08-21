@@ -25,9 +25,7 @@ AddEventHandler("Z:timesynchost", function(time)
 	end)
 end)
 
-function DistanceBetweenCoords(ent1, ent2)
-    local x1,y1,z1 = table.unpack(GetEntityCoords(ent1, true))
-    local x2,y2,z2 = table.unpack(GetEntityCoords(ent2, true))
+function DistanceBetweenCoords(x1,y1,z1,x2,y2,z2)
     local deltax = x1 - x2
     local deltay = y1 - y2
     local deltaz = y1 - y2
@@ -38,5 +36,5 @@ function DistanceBetweenCoords(ent1, ent2)
     zout = math.abs(deltaz)
     result = {distance = dist, x = xout, y = yout, z = zout}
     
-    return result
+    return dist
 end

@@ -49,7 +49,6 @@ consumableItems = {
 consumableItems.count = {}
 for i,Consumable in ipairs(consumableItems) do		
 	consumableItems.count[i] = 0.0
-	Citizen.Trace(consumableItems.count[i])
 end
 
 consumableItems.replenish = {
