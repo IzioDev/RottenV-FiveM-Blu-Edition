@@ -52,17 +52,16 @@ for i,Consumable in ipairs(consumableItems) do
 end
 
 consumableItems.replenish = {
-	{hunger = 15.0,thirst = 3.0,health = 20.0,"The healthy snack for Everyone!"},
-	{hunger = 3.0,thirst = 30.0,health = 10.0,"Famous Cocaine-Containing Drink"},
-	{hunger = 10.0,thirst = 40.0,health = 15.0,"Galactic."},
-	{hunger = 15.0,thirst = -10.0,health = 4.0,"Quick to eat, doesn't taste like much, fills the stomach tho."},
-	{hunger = 40.0,thirst = -25.0,health = 6.0,"Yummie"},
-	{hunger = 60.0,thirst = -10.0,health = 6.0,"Due to extensive research scientists have discovered a new form of beef called Beefium, better than ever, and tastier too!"},
-	{hunger = 0.0,thirst = 0.0,health = 20.0,"Please do not apply on broken hearts."},
-	{hunger = 3.0,thirst = 10.0,health = 5.0,"Tasty AND Healthy!"},
-	{hunger = 50.0,thirst = 30.0,health = 10.0,"Fat.. but so delicious."},
-	{hunger = 15.0,thirst = -15.0,health = 10.0,"Deep Fried is best fried."},
-	
+	{hunger = 15.0,thirst = 3.0,health = 5,"The healthy snack for Everyone!"},
+	{hunger = 3.0,thirst = 30.0,health = 5,"Famous Cocaine-Containing Drink"},
+	{hunger = 10.0,thirst = 40.0,health = 5,"Galactic."},
+	{hunger = 15.0,thirst = -10.0,health = 4,"Quick to eat, doesn't taste like much, fills the stomach tho."},
+	{hunger = 40.0,thirst = -25.0,health = 6,"Yummie"},
+	{hunger = 60.0,thirst = -10.0,health = 6,"Due to extensive research scientists have discovered a new form of beef called Beefium, better than ever, and tastier too!"},
+	{hunger = 0.0,thirst = 0.0,health = 20,"Please do not apply on broken hearts."},
+	{hunger = 3.0,thirst = 10.0,health = 5,"Tasty AND Healthy!"},
+	{hunger = 50.0,thirst = 30.0,health = 5,"Fat.. but so delicious."},
+	{hunger = 15.0,thirst = -15.0,health = 5,"Deep Fried is best fried."},
 }
 
 
@@ -104,11 +103,11 @@ Citizen.CreateThread(function()
 				if consumableItems.count[cindex] > 0.0 and WarMenu.Button(Consumable, tostring(math.round(consumableItems.count[cindex]))) then
 					DecorSetFloat(GetPlayerPed(-1), "hunger", DecorGetFloat(GetPlayerPed(-1),"hunger")+consumableItems.replenish[cindex].hunger)
 					DecorSetFloat(GetPlayerPed(-1), "thirst", DecorGetFloat(GetPlayerPed(-1),"thirst")+consumableItems.replenish[cindex].thirst)
-							--	if GetEntityHealth(GetPlayerPed(-1)) + consumableItems.replenish[cindex].health > 200.0 then
-							--		SetEntityHealth(GetPlayerPed(-1), 200.0)
-							--	elseif GetEntityHealth(GetPlayerPed(-1)) + consumableItems.replenish[cindex].health < 200.0 then
-							--		SetEntityHealth(GetPlayerPed(-1), GetEntityHealth(GetPlayerPed(-1))+ consumableItems.replenish[cindex].health)
-							--	end
+						local newhealth = GetEntityHealth(GetPlayerPed(-1)) + consumableItems.replenish[cindex].health
+						SetEntityHealth(GetPlayerPed(-1), newhealth)
+						if GetEntityHealth(GetPlayerPed(-1)) > 200.0 then
+							SetEntityHealth(GetPlayerPed(-1), 200.0)
+						end
 					consumableItems.count[cindex] = consumableItems.count[cindex]-1.0
 				end
 			end
