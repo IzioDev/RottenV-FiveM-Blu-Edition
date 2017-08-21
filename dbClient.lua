@@ -72,7 +72,7 @@ local weapons =
 
 Citizen.CreateThread( function()
 	RegisterNetEvent('loadPlayerIn')
-	AddEventHandler('loadPlayerIn', function(x,y,z,hunger,thirst,weapons,inventory) 
+	AddEventHandler('loadPlayerIn', function(x,y,z,hunger,thirst,weapons,inventory,health) 
 		Wait(500)
 		local playerPed = GetPlayerPed(-1)
 		Citizen.Trace("Recieving Stats...")
@@ -119,6 +119,7 @@ Citizen.CreateThread( function()
 		
 		DecorSetFloat(playerPed, "hunger", hunger)
 		DecorSetFloat(playerPed, "thirst", thirst)
+		SetEntityHealth(GetPlayerPed(-1), health)
 		Citizen.Trace("Done!")
 	end)
 	
@@ -167,7 +168,7 @@ Citizen.CreateThread( function()
 			end
 		end
 		
-		TriggerServerEvent("SavePlayerData",GetPlayerServerId(PlayerId()), posX,posY,posZ,hunger,thirst,PedWeapons,PedItems)
+		TriggerServerEvent("SavePlayerData",GetPlayerServerId(PlayerId()), posX,posY,posZ,hunger,thirst,PedWeapons,PedItems,GetEntityHealth(GetPlayerPed(-1)))
 		
 		Citizen.Trace("Saving PlayerData!")
 		if not allowTimer then
