@@ -59,18 +59,18 @@ for i,Consumable in ipairs(consumableItems) do
 end
 
 consumableItems.replenish = {
-	{hunger = 15.0,thirst = 3.0,health = 5,"The healthy snack for Everyone!"},
-	{hunger = 3.0,thirst = 30.0,health = 5,"Famous Cocaine-Containing Drink"},
-	{hunger = 10.0,thirst = 40.0,health = 5,"Galactic."},
-	{hunger = 15.0,thirst = -10.0,health = 4,"Quick to eat, doesn't taste like much, fills the stomach tho."},
-	{hunger = 40.0,thirst = -25.0,health = 6,"Yummie"},
-	{hunger = 60.0,thirst = -10.0,health = 6,"Due to extensive research scientists have discovered a new form of beef called Beefium, better than ever, and tastier too!"},
-	{hunger = 0.0,thirst = 0.0,health = 20,"Please do not apply on broken hearts."},
-	{hunger = 3.0,thirst = 10.0,health = 5,"Tasty AND Healthy!"},
-	{hunger = 50.0,thirst = 30.0,health = 5,"Fat.. but so delicious."},
-	{hunger = 15.0,thirst = -15.0,health = 5,"Deep Fried is best fried."},
-	{hunger = 0.0,thirst = 0.0,health = 50,"Mandatory in every Motorised Vehicle by Law, also useful if you are about to die."},
-	{hunger = 0.0,thirst = 50.0,health = 5,"Fresh, clean water, delicious."},
+	{hunger = 15.0,thirst = 3.0,health = 5,desc = "The healthy snack for Everyone!"},
+	{hunger = 3.0,thirst = 30.0,health = 5,desc = "Famous Cocaine-Containing Drink"},
+	{hunger = 10.0,thirst = 40.0,health = 5,desc = "Galactic."},
+	{hunger = 15.0,thirst = -10.0,health = 4,desc = "Quick to eat, doesn't taste like much, fills the stomach tho."},
+	{hunger = 40.0,thirst = -25.0,health = 6,desc = "Yummie"},
+	{hunger = 60.0,thirst = -10.0,health = 6,desc = "Due to extensive research scientists have discovered a new form of beef called Beefium, better than ever, and tastier too!"},
+	{hunger = 0.0,thirst = 0.0,health = 20,desc = "Please do not apply on broken hearts."},
+	{hunger = 3.0,thirst = 10.0,health = 5,desc = "Tasty AND Healthy!"},
+	{hunger = 50.0,thirst = 30.0,health = 5,desc = "Fat.. but so delicious."},
+	{hunger = 15.0,thirst = -15.0,health = 5,desc = "Deep Fried is best fried."},
+	{hunger = 0.0,thirst = 0.0,health = 50,desc = "Mandatory in every Motorised Vehicle by Law, also useful if you are about to die."},
+	{hunger = 0.0,thirst = 50.0,health = 5,desc = "Fresh, clean water, delicious."},
 }
 
 
