@@ -167,7 +167,7 @@ RegisterNetEvent("Z:cleanup")
 AddEventHandler("Z:cleanup", function()
 	for i, weaponInfo in pairs(weapons) do
 		-- Set weapon as no longer needed for despawning
-		if DoesPickupExist(weaponInfo.weapon) and DoesEntityExist(weaponInfo.weapon) then	
+		if DoesPickupExist(weaponInfo.weapon) then	
 			--	SetEntityAsNoLongerNeeded(weaponInfo.weapon)
 			RemovePickup(weaponInfo.weapon)
 		end
