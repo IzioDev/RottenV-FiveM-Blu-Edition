@@ -5,7 +5,7 @@ RegisterNetEvent("adminresponse")
 RegisterNetEvent("Z:playerUpdate")
 RegisterNetEvent("amiadmin")
 
-AddEventHandler('adminresponse', function(response,players)
+AddEventHandler('adminresponse', function(response)
 
 isAdmin = response
 
@@ -76,7 +76,7 @@ Citizen.CreateThread(function()
 		
 		for i,thePlayer in ipairs(players) do
 			if WarMenu.MenuButton("["..GetPlayerServerId( thePlayer ).."] "..GetPlayerName( thePlayer ), 'spectateplayers') then
-				spectatePlayer(GetPlayerPed(thePlayer))
+				spectatePlayer(GetPlayerPed(thePlayer), GetPlayerName( thePlayer ))
 			end
 		end
 		WarMenu.Display()
@@ -126,7 +126,7 @@ end
 GetPlayerList()
 
 
-function spectatePlayer(target)
+function spectatePlayer(target,name)
 	local playerPed = GetPlayerPed(-1) -- yourself
 	enable = true
 	if target == playerPed then enable = false end
@@ -149,7 +149,7 @@ function spectatePlayer(target)
 		end
 
 
-		TriggerEvent("showNotification", "Spectating ~b~<C>"..GetPlayerName( target ).."</C>.")
+		TriggerEvent("showNotification", "Spectating ~b~<C>"..name.."</C>.")
 	else
 		if(not IsScreenFadedOut() and not IsScreenFadingOut()) then
 			DoScreenFadeOut(1000)
@@ -167,7 +167,7 @@ function spectatePlayer(target)
 			end
 		end
 
-		TriggerEvent("showNotification", "Stopped Spectating ~b~<C>"..GetPlayerName( target ).."</C>.")
+		TriggerEvent("showNotification", "Stopped Spectating ~b~<C>"..name.."</C>.")
 	end
 end
 

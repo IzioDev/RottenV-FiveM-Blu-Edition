@@ -50,6 +50,8 @@ end)
 
 local leapYear = 1
 
+
+Citizen.CreateThread( function()
 TriggerServerEvent("tads:newplayer")
 
 RegisterNetEvent("tads:timeanddatesync")
@@ -106,3 +108,6 @@ function GetDaysInCurrentMonth()
 		return 31
 	end
 end
+
+end)
+
