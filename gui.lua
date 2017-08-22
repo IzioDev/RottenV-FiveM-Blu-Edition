@@ -112,18 +112,21 @@ Citizen.CreateThread(function()
 end)
 
 
-
-function GetPlayerList()
-    players = {}
-
-    for i = 0, 31 do
-        if NetworkIsPlayerActive( i ) then
-            table.insert( players, i )
-        end
-    end
-	SetTimeout(5000, GetPlayerList)
-end
-GetPlayerList()
+Citizen.CreateThread( function()
+	while true do 
+	
+		Citizen.Wait(10)
+		function GetPlayerList()
+			players = {}
+			for i = 0, 31 do
+				if NetworkIsPlayerActive( i ) then
+					table.insert( players, i )
+				end
+			end
+		end
+		
+	end
+end)
 
 
 function spectatePlayer(target,name)
