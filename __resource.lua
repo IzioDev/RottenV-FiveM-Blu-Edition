@@ -6,6 +6,7 @@ server_scripts {
 	"hosthandler.lua",
 	"dbServer.lua",
 	"drops.lua",
+	"gui_s.lua",
 } 
 
 client_scripts {
