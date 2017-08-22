@@ -544,15 +544,19 @@ Citizen.CreateThread(function()
 		end
 		
 		for i, car in pairs(cars) do
-			if not DoesEntityExist(car) or IsEntityDead(car) then
+			if not DoesEntityExist(car) then
+				SetEntityAsNoLongerNeeded(car)
 				table.remove(cars, i)
+			elseif IsEntityDead(car) then
+				SetEntityAsNoLongerNeeded(car)
+				DeleteDeadVeh(car)
 			else
 				local	playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
 				local	carX, carY = table.unpack(GetEntityCoords(car, false))
 				
 				if carX < playerX - 1000 or carX > playerX + 1000 or carY < playerY - 1000 or carY > playerY + 1000 then
 					-- Set car as no longer needed for despawning
-					Citizen.InvokeNative(0xB736A491E64A32CF, Citizen.PointerValueIntInitialized(car))
+					SetEntityAsNoLongerNeeded(car)
 					table.remove(cars, i)
 				end
 			end
@@ -560,6 +564,13 @@ Citizen.CreateThread(function()
 	end
 end)
 
+
+Citzen.CreateThread(function()
+	function DeleteDeadVeh(veh)
+		Citizen.Wait(180000)
+		DeleteVehicle(veh)
+	end
+end)
 
 Citizen.CreateThread(function()
 	while true do

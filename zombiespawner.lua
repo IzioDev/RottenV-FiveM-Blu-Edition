@@ -435,6 +435,7 @@ Citizen.CreateThread(function()
 			elseif IsPedDeadOrDying(ped, 1) then
 				-- Set ped as no longer needed for despawning
 				Citizen.InvokeNative(0xB736A491E64A32CF, Citizen.PointerValueIntInitialized(ped))
+					DeleteDeadPed(ped)
 				table.remove(peds, i)
 			else
 				playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
@@ -470,6 +471,13 @@ Citizen.CreateThread(function()
 	end
 end)
 
+Citzen.CreateThread(function()
+	function DeleteDeadPed(ped)
+		Citizen.Wait(60000)
+		DeletePed(ped)
+	end
+end)
+		
 RegisterNetEvent("Z:cleanup")
 AddEventHandler("Z:cleanup", function()
 	for i, ped in pairs(peds) do

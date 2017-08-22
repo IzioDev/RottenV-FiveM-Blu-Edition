@@ -435,6 +435,7 @@ Citizen.CreateThread(function()
 			elseif IsPedDeadOrDying(ped, 1) then
 				-- Set ped as no longer needed for despawning
 				Citizen.InvokeNative(0xB736A491E64A32CF, Citizen.PointerValueIntInitialized(ped))
+				DeleteDeadPed(ped)
 				table.remove(bandits, i)
 			else
 				
