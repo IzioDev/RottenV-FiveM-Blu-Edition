@@ -471,7 +471,7 @@ Citizen.CreateThread(function()
 	end
 end)
 
-Citzen.CreateThread(function()
+Citizen.CreateThread(function()
 	function DeleteDeadPed(ped)
 		Citizen.Wait(60000)
 		DeletePed(ped)

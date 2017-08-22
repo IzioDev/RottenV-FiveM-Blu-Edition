@@ -565,7 +565,7 @@ Citizen.CreateThread(function()
 end)
 
 
-Citzen.CreateThread(function()
+Citizen.CreateThread(function()
 	function DeleteDeadVeh(veh)
 		Citizen.Wait(180000)
 		DeleteVehicle(veh)
