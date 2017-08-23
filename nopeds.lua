@@ -35,3 +35,20 @@ Citizen.CreateThread(function()
 		Citizen.Wait(1)
 	end
 end)
+
+
+
+Citizen.CreateThread(function()
+	while true do
+		local handle, ped = FindFirstPed()
+		local finished = false -- FindNextPed will turn the first variable to false when it fails to find another ped in the index
+		repeat
+			if IsEntityDead(ped) and not IsPedAPlayer(ped) then
+				DeletePed(ped)
+			end
+			finished, ped = FindNextPed(handle) -- first param returns true while entities are found
+		until not finished
+		EndFindPed(handle)
+		Citizen.Wait(20000)
+end
+end)
