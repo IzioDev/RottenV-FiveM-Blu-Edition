@@ -36,7 +36,34 @@ Citizen.CreateThread(function()
 	end
 end)
 
-
+Citizen.CreateThread(function()
+	while true do
+		local handle, veh = FindFirstVehicle()
+		local finished = false -- FindNextPed will turn the first variable to false when it fails to find another ped in the index
+		repeat
+			if GetEntityHealth(veh) == 0 then
+				SetEntityAsNoLongerNeeded(veh)
+				model = GetEntityModel(veh)
+				SetModelAsNoLongerNeeded(model)
+				SetEntityAsMissionEntity(veh,true,true)
+				DeleteEntity(veh)
+				Citizen.Trace("Deleted exploded vehicle")
+			end
+			local finished, veh = FindNextVehicle(handle) -- first param returns true while entities are found
+			if GetEntityHealth(veh) == 0 then
+				SetEntityAsMissionEntity(veh,true,true)
+				SetEntityAsNoLongerNeeded(veh)
+				model = GetEntityModel(veh)
+				SetModelAsNoLongerNeeded(model)
+				SetEntityAsMissionEntity(veh,true,true)
+				DeleteEntity(veh)
+				Citizen.Trace("Deleted exploded vehicle")
+			end
+		until not finished
+		EndFindVehicle(handle)
+		Citizen.Wait(160000)
+end
+end)
 
 Citizen.CreateThread(function()
 	while true do
@@ -44,14 +71,24 @@ Citizen.CreateThread(function()
 		local finished = false -- FindNextPed will turn the first variable to false when it fails to find another ped in the index
 		repeat
 			if IsPedDeadOrDying(ped) and not IsPedAPlayer(ped) then
-				SetEntityAsMissionEntity(ped)
+				SetEntityAsMissionEntity(ped,true,true)
 				SetEntityAsNoLongerNeeded(ped)
 				model = GetEntityModel(ped)
 				SetModelAsNoLongerNeeded(model)
+				SetEntityAsMissionEntity(ped,true,true)
 				DeleteEntity(ped)
 				Citizen.Trace("Deleted Dead Zombie")
 			end
 			finished, ped = FindNextPed(handle) -- first param returns true while entities are found
+			if IsPedDeadOrDying(ped) and not IsPedAPlayer(ped) then
+				SetEntityAsMissionEntity(ped,true,true)
+				SetEntityAsNoLongerNeeded(ped)
+				model = GetEntityModel(ped)
+				SetModelAsNoLongerNeeded(model)
+				SetEntityAsMissionEntity(ped,true,true)
+				DeleteEntity(ped)
+				Citizen.Trace("Deleted Dead Zombie")
+			end
 		until not finished
 		EndFindPed(handle)
 		Citizen.Wait(60000)

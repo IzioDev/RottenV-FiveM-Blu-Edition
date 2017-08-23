@@ -45,7 +45,7 @@ Citizen.CreateThread(function()
 	while true do
 		Wait(1)
 		
-		if #spawnedItems < 3 then
+		if #spawnedItems < 2 then
 			x, y, z = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
 			
 			repeat
@@ -56,7 +56,7 @@ Citizen.CreateThread(function()
 					NewItemX = x + math.random(-250, 250)
 					NewItemY = y + math.random(-250, 250)
 					_,NewItemZ = GetGroundZFor_3dCoord(NewItemX+.0,NewItemY+.0,z+9999.0, 1)
-				until NewItemZ ~= 0 and NewItemZ < z+20
+				until NewItemZ ~= 0 and NewItemZ < z+10.0 and NewItemZ > z-10.0 and GetPedParachuteState(GetPlayerPed(-1)) == -1 or GetPedParachuteState(GetPlayerPed(-1)) == 0
 				
 				NewItemZ = NewItemZ+1
 				for player, _ in pairs(players) do
@@ -132,7 +132,7 @@ Citizen.CreateThread(function()
 			local itemX,itemY,itemZ = table.unpack(GetPickupCoords(itemInfo.pickup))
 			playerX, playerY, playerZ = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
 			--		DrawLine(playerX,playerY, playerZ, itemInfo.x, itemInfo.y, itemInfo.z, 0.0,255.0,0.0,255)
-			DrawLightWithRange(itemX,itemY,itemZ+0.1, 1.0, 1.0, 1.0, 1.7, 0.001)
+			DrawLightWithRangeAndShadow(itemX,itemY,itemZ+0.1, 255, 255, 255, 3.0, 50.0, 5.0)
 		end
 	end
 end) 

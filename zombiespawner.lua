@@ -435,7 +435,7 @@ Citizen.CreateThread(function()
 			elseif IsPedDeadOrDying(ped, 1) then
 				-- Set ped as no longer needed for despawning
 				local dropChance = math.random(0,100)
-				if GetPedSourceOfDeath(ped) == GetPlayerPed(-1) and dropChance >= 90 then
+				if GetPedSourceOfDeath(ped) == GetPlayerPed(-1) and dropChance >= 95 then
 					local pedcoordx,pedcoordy,pedcoordz = table.unpack(GetEntityCoords(ped,true))
 					ForceCreateFoodPickupAtCoord(pedcoordx,pedcoordy,pedcoordz)
 				end

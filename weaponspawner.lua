@@ -95,7 +95,7 @@ Citizen.CreateThread(function()
 					NewWeaponX = x + math.random(-250, 250)
 					NewWeaponY = y + math.random(-250, 250)
 					_,NewWeaponZ = GetGroundZFor_3dCoord(NewWeaponX+.0,NewWeaponY+.0,z+9999.0, 1)
-				until NewWeaponZ ~= 0 and NewWeaponZ < z+10 and NewWeaponZ > z-10
+				until NewWeaponZ ~= 0 and NewWeaponZ < z+10.0 and NewWeaponZ > z-10.0 and GetPedParachuteState(GetPlayerPed(-1)) == -1 or GetPedParachuteState(GetPlayerPed(-1)) == 0
 				
 				NewWeaponZ = NewWeaponZ+1
 				for player, _ in pairs(players) do
@@ -157,7 +157,7 @@ Citizen.CreateThread(function()
 			local weaponX,weaponY,weaponZ = table.unpack(GetPickupCoords(weaponInfo.weapon))
 			playerX, playerY, playerZ = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
 			--		DrawLine(playerX,playerY, playerZ, weaponInfo.x, weaponInfo.y, weaponInfo.z, 0.0,255.0,0.0,255)
-			DrawLightWithRange(weaponX,weaponY,weaponZ+0.1, 1.0, 1.0, 1.0, 1.7, 0.001)
+			DrawLightWithRangeAndShadow(weaponX,weaponY,weaponZ+0.1, 255, 255, 255, 3.0, 50.0, 5.0)
 		end
 	end
 end) 
