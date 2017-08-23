@@ -372,7 +372,7 @@ Citizen.CreateThread(function()
 				
 				for _, player in pairs(players) do
 					Wait(1)
-					playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(player), true))
+					playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
 					if newX > playerX - 60 and newX < playerX + 60 or newY > playerY - 60 and newY < playerY + 60 then
 						canSpawn = false
 						break

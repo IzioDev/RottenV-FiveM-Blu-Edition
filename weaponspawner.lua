@@ -83,29 +83,31 @@ NewWeaponZ = 0.0
 Citizen.CreateThread(function()
 	while true do
 		Wait(1)
-		
 		if #weapons < 7 then
-			x, y, z = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
+			playerX, playerY, playerZ = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
 			
 			repeat
 				Wait(1)
-				
 				repeat
 					Wait(1)
 					NewWeaponX = x + math.random(-250, 250)
 					NewWeaponY = y + math.random(-250, 250)
-					_,NewWeaponZ = GetGroundZFor_3dCoord(NewWeaponX+.0,NewWeaponY+.0,z+9999.0, 1)
-				until NewWeaponZ ~= 0 and NewWeaponZ < z+10.0 and NewWeaponZ > z-10.0 and GetPedParachuteState(GetPlayerPed(-1)) == -1 or GetPedParachuteState(GetPlayerPed(-1)) == 0
+					_,NewWeaponZ = GetGroundZFor_3dCoord(NewWeaponX+.0,NewWeaponY+.0,playerZ+9999.0, 1)
+				until NewWeaponZ ~= 0
 				
 				NewWeaponZ = NewWeaponZ+1
 				for player, _ in pairs(players) do
 					Wait(1)
-					playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(player), true))
+					playerX, playerY, playerZ = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
 					if NewWeaponX > playerX - 60 and NewWeaponX < playerX + 60 or NewWeaponY > playerY - 60 and NewWeaponY < playerY + 60 then
 						canSpawn = false
 						break
 					else
-						canSpawn = true
+						if NewWeaponZ >= playerZ-10 and NewWeaponZ <= playerZ+10 then
+							canSpawn = true
+						else
+							canSpawn = false
+						end
 					end
 				end
 			until canSpawn
