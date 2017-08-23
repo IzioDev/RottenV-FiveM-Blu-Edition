@@ -434,8 +434,13 @@ Citizen.CreateThread(function()
 				table.remove(peds, i)
 			elseif IsPedDeadOrDying(ped, 1) then
 				-- Set ped as no longer needed for despawning
+				local dropChance = math.random(0,100)
+				if GetPedSourceOfDeath(ped) == GetPlayerPed(-1) and dropChance >= 90 then
+					local pedcoordx,pedcoordy,pedcoordz = table.unpack(GetEntityCoords(ped,true))
+					ForceCreateFoodPickupAtCoord(pedcoordx,pedcoordy,pedcoordz)
+				end
+				
 				Citizen.InvokeNative(0xB736A491E64A32CF, Citizen.PointerValueIntInitialized(ped))
-					DeleteDeadPed(ped)
 				table.remove(peds, i)
 			else
 				playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))

@@ -43,12 +43,17 @@ Citizen.CreateThread(function()
 		local handle, ped = FindFirstPed()
 		local finished = false -- FindNextPed will turn the first variable to false when it fails to find another ped in the index
 		repeat
-			if IsEntityDead(ped) and not IsPedAPlayer(ped) then
-				DeletePed(ped)
+			if IsPedDeadOrDying(ped) and not IsPedAPlayer(ped) then
+				SetEntityAsMissionEntity(ped)
+				SetEntityAsNoLongerNeeded(ped)
+				model = GetEntityModel(ped)
+				SetModelAsNoLongerNeeded(model)
+				DeleteEntity(ped)
+				Citizen.Trace("Deleted Dead Zombie")
 			end
 			finished, ped = FindNextPed(handle) -- first param returns true while entities are found
 		until not finished
 		EndFindPed(handle)
-		Citizen.Wait(20000)
+		Citizen.Wait(60000)
 end
 end)

@@ -14,6 +14,33 @@ spawnedItems = {}
 itemLights = {}
 NewItemZ = 0.0
 
+
+Citizen.CreateThread(function()
+	function ForceCreateFoodPickupAtCoord(x,y,z)
+	
+		local pickupItem = math.random(1, #consumableItems)
+		local chance = math.random(0,100)
+		if chance > 80 then
+			pickupItemCount = math.random(1,3)+0.0
+		else
+			pickupItemCount = 1.0
+		end
+		local pickup = CreatePickupRotate(GetHashKey("PICKUP_PORTABLE_PACKAGE"), x, y, z, 0.0, 0.0, 0.0, 512, 1, 24, 24, true, GetHashKey("PICKUP_PORTABLE_PACKAGE"))
+		Citizen.Trace(x)
+		Citizen.Trace(y)
+		Citizen.Trace(z)
+		local itemInfo = {pickup = pickup, x = x, y = y, z = z, pickupItem = pickupItem, pickupItemCount = pickupItemCount}
+		if itemInfo.pickup ~= 0 then
+			table.insert(spawnedItems, itemInfo)
+			Citizen.Trace(itemInfo.pickup.." Spawned by Ped Dying!")
+		else
+			RemovePickup(itemInfo.pickup)
+			Citizen.Trace("Removed Faulty Pickup!")
+		end
+	end
+end)
+
+
 Citizen.CreateThread(function()
 	while true do
 		Wait(1)

@@ -319,7 +319,6 @@ local spawnableCars =
 	"Regina",
 	"RentalBus",
 	"Rhapsody",
-	"Rhino",
 	"Riot",
 	"Ripley",
 	"Rocoto",
@@ -544,12 +543,9 @@ Citizen.CreateThread(function()
 		end
 		
 		for i, car in pairs(cars) do
-			if not DoesEntityExist(car) then
+			if not DoesEntityExist(car) or GetEntityHealth(car) == 0 then
 				SetEntityAsNoLongerNeeded(car)
 				table.remove(cars, i)
-			elseif IsEntityDead(car) then
-				SetEntityAsNoLongerNeeded(car)
-				DeleteDeadVeh(car)
 			else
 				local	playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
 				local	carX, carY = table.unpack(GetEntityCoords(car, false))
@@ -564,13 +560,6 @@ Citizen.CreateThread(function()
 	end
 end)
 
-
-Citizen.CreateThread(function()
-	function DeleteDeadVeh(veh)
-		Citizen.Wait(180000)
-		DeleteVehicle(veh)
-	end
-end)
 
 Citizen.CreateThread(function()
 	while true do

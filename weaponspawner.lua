@@ -95,7 +95,7 @@ Citizen.CreateThread(function()
 					NewWeaponX = x + math.random(-250, 250)
 					NewWeaponY = y + math.random(-250, 250)
 					_,NewWeaponZ = GetGroundZFor_3dCoord(NewWeaponX+.0,NewWeaponY+.0,z+9999.0, 1)
-				until NewWeaponZ ~= 0 and NewWeaponZ < z+20
+				until NewWeaponZ ~= 0 and NewWeaponZ < z+10 and NewWeaponZ > z-10
 				
 				NewWeaponZ = NewWeaponZ+1
 				for player, _ in pairs(players) do
