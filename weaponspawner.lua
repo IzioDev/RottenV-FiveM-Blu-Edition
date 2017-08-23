@@ -103,7 +103,7 @@ Citizen.CreateThread(function()
 						canSpawn = false
 						break
 					else
-						if NewWeaponZ >= playerZ-10 and NewWeaponZ <= playerZ+10 then
+						if NewWeaponZ >= playerZ-12 and NewWeaponZ <= playerZ+12 then
 							canSpawn = true
 						else
 							canSpawn = false

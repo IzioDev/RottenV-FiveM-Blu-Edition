@@ -56,17 +56,21 @@ Citizen.CreateThread(function()
 					NewItemX = x + math.random(-250, 250)
 					NewItemY = y + math.random(-250, 250)
 					_,NewItemZ = GetGroundZFor_3dCoord(NewItemX+.0,NewItemY+.0,z+9999.0, 1)
-				until NewItemZ ~= 0 and NewItemZ < z+10.0 and NewItemZ > z-10.0 and GetPedParachuteState(GetPlayerPed(-1)) == -1 or GetPedParachuteState(GetPlayerPed(-1)) == 0
+				until NewItemZ ~= 0
 				
 				NewItemZ = NewItemZ+1
 				for player, _ in pairs(players) do
 					Wait(1)
-					playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(player), true))
+					playerX, playerY, playerZ = table.unpack(GetEntityCoords(GetPlayerPed(player), true))
 					if NewItemX > playerX - 60 and NewItemX < playerX + 60 or NewItemY > playerY - 60 and NewItemY < playerY + 60 then
 						canSpawn = false
 						break
 					else
-						canSpawn = true
+						if NewItemZ >= playerZ-12 and NewItemZ <= playerZ+12 then
+							canSpawn = true
+						else
+							canSpawn = false
+						end
 					end
 				end
 			until canSpawn
