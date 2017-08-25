@@ -85,7 +85,6 @@ Citizen.CreateThread(function()
 		Wait(1)
 		if #weapons < 7 then
 			playerX, playerY, playerZ = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
-			
 			repeat
 				Wait(1)
 				repeat

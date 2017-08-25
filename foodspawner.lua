@@ -26,9 +26,6 @@ Citizen.CreateThread(function()
 			pickupItemCount = 1.0
 		end
 		local pickup = CreatePickupRotate(GetHashKey("PICKUP_PORTABLE_PACKAGE"), x, y, z, 0.0, 0.0, 0.0, 512, 1, 24, 24, true, GetHashKey("PICKUP_PORTABLE_PACKAGE"))
-		Citizen.Trace(x)
-		Citizen.Trace(y)
-		Citizen.Trace(z)
 		local itemInfo = {pickup = pickup, x = x, y = y, z = z, pickupItem = pickupItem, pickupItemCount = pickupItemCount}
 		if itemInfo.pickup ~= 0 then
 			table.insert(spawnedItems, itemInfo)
@@ -44,13 +41,10 @@ end)
 Citizen.CreateThread(function()
 	while true do
 		Wait(1)
-		
 		if #spawnedItems < 2 then
 			x, y, z = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
-			
 			repeat
 				Wait(1)
-				
 				repeat
 					Wait(1)
 					NewItemX = x + math.random(-250, 250)
@@ -100,7 +94,7 @@ Citizen.CreateThread(function()
 		
 		for i, itemInfo in pairs(spawnedItems) do
 			playerX,playerY,playerZ = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
-			if not DoesPickupExist(itemInfo.pickup) or HasPickupBeenCollected(itemInfo.pickup) and DistanceBetweenCoords(playerX,playerY,playerZ,itemInfo.x,itemInfo.y,itemInfo.z) < 10.0 then
+			if not DoesPickupExist(itemInfo.pickup) and DistanceBetweenCoords(playerX,playerY,playerZ,itemInfo.x,itemInfo.y,itemInfo.z) < 10.0 then
 				
 				Citizen.Trace("pickup: "..itemInfo.pickup.." with "..itemInfo.pickupItem.." count "..itemInfo.pickupItemCount)
 				consumableItems.count[itemInfo.pickupItem] = consumableItems.count[itemInfo.pickupItem]+itemInfo.pickupItemCount
