@@ -89,8 +89,8 @@ Citizen.CreateThread(function()
 				Wait(1)
 				repeat
 					Wait(1)
-					NewWeaponX = x + math.random(-250, 250)
-					NewWeaponY = y + math.random(-250, 250)
+					NewWeaponX = playerX + math.random(-250, 250)
+					NewWeaponY = playerY + math.random(-250, 250)
 					_,NewWeaponZ = GetGroundZFor_3dCoord(NewWeaponX+.0,NewWeaponY+.0,playerZ+9999.0, 1)
 				until NewWeaponZ ~= 0
 				

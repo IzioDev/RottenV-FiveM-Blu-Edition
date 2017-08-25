@@ -55,12 +55,12 @@ Citizen.CreateThread(function()
 				NewItemZ = NewItemZ+1
 				for player, _ in pairs(players) do
 					Wait(1)
-					playerX, playerY, playerZ = table.unpack(GetEntityCoords(GetPlayerPed(player), true))
+					playerX, playerY = table.unpack(GetEntityCoords(GetPlayerPed(player), true))
 					if NewItemX > playerX - 60 and NewItemX < playerX + 60 or NewItemY > playerY - 60 and NewItemY < playerY + 60 then
 						canSpawn = false
 						break
 					else
-						if NewItemZ >= playerZ-12 and NewItemZ <= playerZ+12 then
+						if NewItemZ >= z-12 and NewItemZ <= z+12 then
 							canSpawn = true
 						else
 							canSpawn = false
