@@ -129,7 +129,7 @@ Citizen.CreateThread(function()
 		for i, itemInfo in pairs(spawnedItems) do
 			local itemX,itemY,itemZ = table.unpack(GetPickupCoords(itemInfo.pickup))
 			playerX, playerY, playerZ = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
-					DrawLine(playerX,playerY, playerZ, itemInfo.x, itemInfo.y, itemInfo.z, 0.0,255.0,0.0,255)
+			--		DrawLine(playerX,playerY, playerZ, itemInfo.x, itemInfo.y, itemInfo.z, 0.0,255.0,0.0,255)
 			DrawLightWithRangeAndShadow(itemX,itemY,itemZ+0.1, 255, 255, 255, 3.0, 50.0, 5.0)
 		end
 	end
