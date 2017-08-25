@@ -94,7 +94,7 @@ Citizen.CreateThread(function()
 		
 		for i, itemInfo in pairs(spawnedItems) do
 			playerX,playerY,playerZ = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
-			if HasPickupBeenCollected(itemInfo.pickup) and DistanceBetweenCoords(playerX,playerY,playerZ,itemInfo.x,itemInfo.y,itemInfo.z) < 10.0 then
+			if HasPickupBeenCollected(itemInfo.pickup) and DistanceBetweenCoords(playerX,playerY,playerZ,itemInfo.x,itemInfo.y,itemInfo.z) < 4.0 then
 				
 				Citizen.Trace("pickup: "..itemInfo.pickup.." with "..itemInfo.pickupItem.." count "..itemInfo.pickupItemCount)
 				consumableItems.count[itemInfo.pickupItem] = consumableItems.count[itemInfo.pickupItem]+itemInfo.pickupItemCount
