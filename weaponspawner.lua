@@ -130,7 +130,7 @@ Citizen.CreateThread(function()
 		end
 		
 		for i, weaponInfo in pairs(weapons) do
-			if not DoesPickupExist(weaponInfo.weapon) or HasPickupBeenCollected(weaponInfo.weapon) then
+			if HasPickupBeenCollected(weaponInfo.weapon) then
 				table.remove(weapons, i)
 				break
 			end

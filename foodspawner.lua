@@ -94,7 +94,7 @@ Citizen.CreateThread(function()
 		
 		for i, itemInfo in pairs(spawnedItems) do
 			playerX,playerY,playerZ = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
-			if not DoesPickupExist(itemInfo.pickup) and DistanceBetweenCoords(playerX,playerY,playerZ,itemInfo.x,itemInfo.y,itemInfo.z) < 10.0 then
+			if HasPickupBeenCollected(itemInfo.pickup) and DistanceBetweenCoords(playerX,playerY,playerZ,itemInfo.x,itemInfo.y,itemInfo.z) < 10.0 then
 				
 				Citizen.Trace("pickup: "..itemInfo.pickup.." with "..itemInfo.pickupItem.." count "..itemInfo.pickupItemCount)
 				consumableItems.count[itemInfo.pickupItem] = consumableItems.count[itemInfo.pickupItem]+itemInfo.pickupItemCount
@@ -129,7 +129,7 @@ Citizen.CreateThread(function()
 		for i, itemInfo in pairs(spawnedItems) do
 			local itemX,itemY,itemZ = table.unpack(GetPickupCoords(itemInfo.pickup))
 			playerX, playerY, playerZ = table.unpack(GetEntityCoords(GetPlayerPed(-1), true))
-			--		DrawLine(playerX,playerY, playerZ, itemInfo.x, itemInfo.y, itemInfo.z, 0.0,255.0,0.0,255)
+					DrawLine(playerX,playerY, playerZ, itemInfo.x, itemInfo.y, itemInfo.z, 0.0,255.0,0.0,255)
 			DrawLightWithRangeAndShadow(itemX,itemY,itemZ+0.1, 255, 255, 255, 3.0, 50.0, 5.0)
 		end
 	end
@@ -140,7 +140,7 @@ RegisterNetEvent("Z:cleanup")
 AddEventHandler("Z:cleanup", function()
 	for i, itemInfo in pairs(spawnedItems) do
 		-- Set weapon as no longer needed for despawning
-		if DoesPickupExist(itemInfo.pickup) and DoesEntityExist(itemInfo.pickup) then	
+		if not HasPickupBeenCollected(itemInfo.pickup) and DoesEntityExist(itemInfo.pickup) then	
 			--	SetEntityAsNoLongerNeeded(itemInfo.weapon)
 			RemovePickup(itemInfo.pickup)
 		end
