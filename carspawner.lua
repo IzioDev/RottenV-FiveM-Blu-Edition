@@ -539,6 +539,7 @@ Citizen.CreateThread(function()
 			if not NetworkGetEntityIsNetworked(car) then
 				NetworkRegisterEntityAsNetworked(car)
 			end
+			SetEntityAsMissionEntity(car, true, true)
 			table.insert(cars, car)
 		end
 		
